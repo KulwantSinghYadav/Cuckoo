@@ -13,7 +13,7 @@
  */
 
 
-package io.aexp.api.client.sample;
+package io.aexp.api.client.core.sample;
 
 import java.io.IOException;
 import java.util.Map;
