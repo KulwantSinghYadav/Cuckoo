@@ -32,8 +32,8 @@ import io.aexp.api.client.core.security.authentication.HmacAuthBuilder;
 
 public class PayWithRewardsClient {
 
-	private static final String CLIENT_ID = "YOUR CLIENT ID";
-	private static final String CLIENT_SECRET = "YOUR CLIENT SECRET_KEY";
+	private static final String CLIENT_ID = "ALzACkxjQt7la9TY11TQqzPsSVYxZtHV";
+	private static final String CLIENT_SECRET = "uJYn9cxkSfakTh1jA5e5CCCcJMDIEXvp";
 	private static final String SEARCH_REWARDS_RESOURCE_URL = "https://api.qasb.americanexpress.com/loyalty/v1/accounts/rewards/search";
 	private static final MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
 	
