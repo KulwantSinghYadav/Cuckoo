@@ -13,12 +13,15 @@
  */
 
 
-package paywithrewards;
+package io.aexp.api.client.core.sample;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
+import io.aexp.api.client.core.configuration.PropertiesConfigurationProvider;
+import io.aexp.api.client.core.security.authentication.AuthProvider;
+import io.aexp.api.client.core.security.authentication.HmacAuthBuilder;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -26,15 +29,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import io.aexp.api.client.core.configuration.PropertiesConfigurationProvider;
-import io.aexp.api.client.core.security.authentication.AuthProvider;
-import io.aexp.api.client.core.security.authentication.HmacAuthBuilder;
 
 public class PayWithRewardsClient {
 
 	private static final String CLIENT_ID = "ALzACkxjQt7la9TY11TQqzPsSVYxZtHV";
 	private static final String CLIENT_SECRET = "uJYn9cxkSfakTh1jA5e5CCCcJMDIEXvp";
-	private static final String SEARCH_REWARDS_RESOURCE_URL = "https://api.qasb.americanexpress.com/loyalty/v1/accounts/rewards/search";
+//	private static final String SEARCH_REWARDS_RESOURCE_URL = "https://api.qasb.americanexpress.com/loyalty/v1/accounts/rewards/search";
+	private static final String SEARCH_REWARDS_RESOURCE_URL = "https://api.qasb.americanexpress.com/loyalty/v2/redemptions/paywithpoints?pricing=true HTTP/1.1";
 	private static final MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
 	
     public String searchRewards(String searchPayload) throws IOException {
