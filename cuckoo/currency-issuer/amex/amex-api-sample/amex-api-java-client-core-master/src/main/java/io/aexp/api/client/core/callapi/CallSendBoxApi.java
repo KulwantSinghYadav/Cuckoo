@@ -2,7 +2,7 @@ package io.aexp.api.client.core.callapi;
 
 import java.io.IOException;
 
-import io.aexp.api.client.core.sample.PayWithRewardsClient;
+import io.aexp.api.client.core.pay.reward.PayWithRewardsClient;
 
 public class CallSendBoxApi {
 	
