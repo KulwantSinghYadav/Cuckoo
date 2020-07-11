@@ -13,7 +13,7 @@
  */
 
 
-package io.aexp.api.client.core.sample;
+package io.aexp.api.client.core.pay.reward;
 
 import java.io.IOException;
 import java.util.Map;
@@ -28,7 +28,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
 
 public class PayWithRewardsClient {
 
@@ -66,6 +65,7 @@ public class PayWithRewardsClient {
             builder.addHeader(header.getKey(), header.getValue());
         }
         Request request = builder.build();
+        System.out.println(request.headers().toString());
 
         OkHttpClient httpClient = new OkHttpClient.Builder().build();
         Response response = httpClient.newCall(request).execute();
