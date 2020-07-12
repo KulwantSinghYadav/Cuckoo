@@ -91,4 +91,6 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/msgpack/jackson-dataformat-msgpack/0.7.1/jackson-dataformat-msgpack-0.7.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/msgpack/msgpack-core/0.7.1/msgpack-core-0.7.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/projectlombok/lombok/1.16.4/lombok-1.16.4.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/squareup/okhttp3/okhttp/3.7.0/okhttp-3.7.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/squareup/okio/okio/1.12.0/okio-1.12.0.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
