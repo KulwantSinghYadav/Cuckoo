@@ -37,16 +37,19 @@ public abstract class SendCityRequest {
 	                .put(RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE, body));
 		}
 		
-        for (Map.Entry<String, String> header : queryParameters.entrySet()) {
+        for (Map.Entry<String, String> header : buildRewardHearder.entrySet()) {
             builder.addHeader(header.getKey(), header.getValue());
         }
 
         if(builder!=null) {
         	 Request request = builder.build();
+        	 System.out.println("request :"+ request.toString());
+        	 System.out.println("request headers :"+ request.headers());
+        	 System.out.println("request url :"+ request.url());
              Response response = client.newCall(request).execute();
              return response.body().string();
         }else {
-        	return "someting went wrong";
+			return "someting went wrong";
         }
        
 	}

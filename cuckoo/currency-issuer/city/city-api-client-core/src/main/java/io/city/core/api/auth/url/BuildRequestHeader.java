@@ -13,13 +13,13 @@ public class BuildRequestHeader implements HeaderProvider {
 
 		Map<String, String> requestHeaderValue = new HashMap<>();
 		
-		requestHeaderValue.put("clientId", UUID.randomUUID().toString());
-		requestHeaderValue.put("uuid", headerValues.get("merchantCode"));
-		requestHeaderValue.put("contentType", headerValues.get("contentType"));
-		requestHeaderValue.put("countryCode", headerValues.get("countryCode"));
-		requestHeaderValue.put("businessCode", headerValues.get("businessCode"));
+		requestHeaderValue.put("client_id", headerValues.get("clientId"));
+		requestHeaderValue.put("uuid", UUID.randomUUID().toString());
+		requestHeaderValue.put("content-type", headerValues.get("contentType"));
+		requestHeaderValue.put("countrycode", headerValues.get("countryCode"));
+		requestHeaderValue.put("businesscode", headerValues.get("businessCode"));
 		requestHeaderValue.put("authorization", headerValues.get("authorization"));
-		requestHeaderValue.put("acceptLanguage", headerValues.get("acceptLanguage"));
+		requestHeaderValue.put("accept-language", headerValues.get("acceptLanguage"));
 		requestHeaderValue.put("accept", headerValues.get("accept"));
 
 		return requestHeaderValue;
