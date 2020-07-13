@@ -28,7 +28,8 @@ public class CallCitiRewardBalance extends SendCityRequest {
 
 		String url = setUrlPattern(headerValues);
 		Map<String, String> queryParameters = setQueryParameter(headerValues);
-
+		
+		//call the city reward api by passing requied parameters.
 		String response = sendApiRequest(url, headerProvider.buildRewardHearder(headerValues), queryParameters, "get", "");
 		
 		System.out.println("Client Reward Balance :"+ response);
@@ -39,12 +40,14 @@ public class CallCitiRewardBalance extends SendCityRequest {
 
 	private String setUrlPattern(Map<String, String> headerValues) {
 
+		//create dynamic url for city reward api.
 		return headerValues.get("cityRewardUrl").concat("/").concat(headerValues.get("vi").concat("/"))
 				.concat(headerValues.get("apiProduct").concat("/")).concat(headerValues.get("endpoint"));
 	}
 
 	private Map<String, String> setQueryParameter(Map<String, String> headerValues) {
-
+		
+		//Set the query parameter for city reward api.
 		Map<String, String> queryParameters = new LinkedHashMap<>();
 		queryParameters.put("cloakedCreditCardNumber", headerValues.get("cloakedCreditCardNumbers"));
 		queryParameters.put("merchantCode", headerValues.get("merchantCode"));

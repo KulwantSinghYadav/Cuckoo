@@ -58,6 +58,13 @@ public class CitiRewardBalanceConfiguration {
 			configMap.put("acceptLanguage", prop.getProperty("accept.language"));
 			configMap.put("accept", prop.getProperty("accept"));
 			
+			//Authrirization Properties.
+			configMap.put("authAuthorization", prop.getProperty("auth.authorization"));
+			configMap.put("authContentType", prop.getProperty("auth.content-type"));
+			configMap.put("authUrl", prop.getProperty("auth.url"));
+			configMap.put("authMediaType", prop.getProperty("auth.media.type"));
+			configMap.put("authScope", prop.getProperty("auth.scope"));
+			
  
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);

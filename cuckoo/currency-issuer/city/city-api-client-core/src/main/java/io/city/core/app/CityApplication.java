@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 import io.city.core.api.client.reward.CallCitiRewardBalance;
+import io.city.core.api.client.reward.auth.CallAuthorization;
 import io.city.core.api.client.reward.eligibility.CallCitiRewardEligibility;
 import io.city.core.api.client.reward.enablement.CallCitiRewardEnablement;
 
@@ -39,6 +40,10 @@ public class CityApplication  implements ApplicationRunner{
 		System.out.println();
 		CallCitiRewardEnablement callCitiRewardEnablement = new CallCitiRewardEnablement();
 		callCitiRewardEnablement.callCityRewardEnablement();
+		
+		System.out.println();
+		CallAuthorization authorizationToken = new CallAuthorization();
+		authorizationToken.callAuthorization();
 		
 	}
 }

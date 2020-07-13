@@ -6,8 +6,7 @@ import java.util.UUID;
 
 public class BuildRequestHeader implements HeaderProvider {
 
-	String rewardUrl;
-
+	//Build request for Reward related api's
 	@Override
 	public Map<String, String> buildRewardHearder(Map<String, String> headerValues) {
 
@@ -24,5 +23,17 @@ public class BuildRequestHeader implements HeaderProvider {
 
 		return requestHeaderValue;
 	}
-
+	
+	//Build request of Authorization api
+	@Override
+	public Map<String, String> buildAuthorization(Map<String, String> headerValues) {
+		Map<String, String> requestHeaderValue = new HashMap<>();
+		
+		requestHeaderValue.put("authorization", headerValues.get("authAuthorization"));
+		requestHeaderValue.put("content-type", headerValues.get("authContentType"));
+		requestHeaderValue.put("accept", headerValues.get("accept"));
+		
+		return requestHeaderValue;
+	}
+	//Create the authorization api calling process in City-reward application with their separate request creation technique.
 }

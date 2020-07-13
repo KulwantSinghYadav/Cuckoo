@@ -25,6 +25,7 @@ public class CallCitiRewardEnablement extends SendCityRequest {
 		Map<String, String> queryParameters = setQueryParameter(headerValues);
 		String body = ApplicationConstant.Get_Citi_Reward_Enablement_Body;
 
+		//call the city reward enablement api by passing requied parameters.
 		String response = sendApiRequest(url, headerProvider.buildRewardHearder(headerValues), queryParameters,"put",body);
 
 		System.out.println("Client Reward Enablement :" + response);
@@ -35,6 +36,7 @@ public class CallCitiRewardEnablement extends SendCityRequest {
 
 	private String setUrlPattern(Map<String, String> headerValues) {
 
+		//create dynamic url for city reward enablement api.
 		return headerValues.get("cityRewardUrl").concat("/").concat(headerValues.get("vi").concat("/"))
 				.concat(headerValues.get("apiProduct").concat("/")).concat(headerValues.get("enablementEndpoint"));
 	}
