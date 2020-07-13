@@ -33,7 +33,7 @@ public class CallCitiRewardEligibility extends SendCityRequest  {
 	private String setUrlPattern(Map<String, String> headerValues) {
 
 		return headerValues.get("cityRewardUrl").concat("/").concat(headerValues.get("vi").concat("/"))
-				.concat(headerValues.get("apiProduct").concat("/")).concat(headerValues.get("cityRewardEligibilityPath").concat("/")).concat(headerValues.get("endpoint"));
+				.concat(headerValues.get("apiProduct").concat("/")).concat(headerValues.get("cityRewardEligibilityPath").concat("/")).concat(headerValues.get("eligibilityEndpoint"));
 	}
 
 	private Map<String, String> setQueryParameter(Map<String, String> headerValues) {

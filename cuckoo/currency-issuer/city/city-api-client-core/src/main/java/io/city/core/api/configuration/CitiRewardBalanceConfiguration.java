@@ -39,6 +39,8 @@ public class CitiRewardBalanceConfiguration {
 			configMap.put("vi", prop.getProperty("city.reward.url.v1"));
 			configMap.put("apiProduct", prop.getProperty("city.reward.url.apiProduct"));
 			configMap.put("endpoint", prop.getProperty("city.reward.url.endpoint"));
+			configMap.put("eligibilityEndpoint", prop.getProperty("city.eligibility.url.endpoint"));
+			configMap.put("enablementEndpoint", prop.getProperty("city.enablement.url.endpoint"));
 			configMap.put("cloakedCreditCardNumbers", prop.getProperty("city.reward.qp.cloakedCreditCardNumber"));
 			configMap.put("merchantCode", prop.getProperty("city.reward.qp.merchantCode"));
 			configMap.put("rewardProgram", prop.getProperty("city.reward.qp.rewardProgram"));

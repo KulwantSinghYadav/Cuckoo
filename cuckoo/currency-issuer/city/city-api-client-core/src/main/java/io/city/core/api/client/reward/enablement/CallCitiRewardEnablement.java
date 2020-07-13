@@ -36,7 +36,7 @@ public class CallCitiRewardEnablement extends SendCityRequest {
 	private String setUrlPattern(Map<String, String> headerValues) {
 
 		return headerValues.get("cityRewardUrl").concat("/").concat(headerValues.get("vi").concat("/"))
-				.concat(headerValues.get("apiProduct").concat("/")).concat(headerValues.get("endpoint"));
+				.concat(headerValues.get("apiProduct").concat("/")).concat(headerValues.get("enablementEndpoint"));
 	}
 
 	private Map<String, String> setQueryParameter(Map<String, String> headerValues) {
