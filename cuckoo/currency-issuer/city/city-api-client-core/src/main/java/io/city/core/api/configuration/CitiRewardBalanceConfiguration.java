@@ -7,6 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import io.city.core.api.auth.url.BuildRequestHeader;
+import io.city.core.api.auth.url.HeaderProvider;
+import io.city.core.api.client.reward.auth.CallAuthorization;
+
+import org.springframework.stereotype.Component;
+
+
 import org.springframework.stereotype.Service;
 
 public class CitiRewardBalanceConfiguration {
@@ -14,8 +21,10 @@ public class CitiRewardBalanceConfiguration {
 	Map<String,String> configMap = new HashMap<>();
 	InputStream inputStream;
 	
+	
 	public Map<String,String> getPropValues() throws IOException {
  
+		
 		try {
 			Properties prop = new Properties();
 			String propFileName = "application.properties";
@@ -31,7 +40,9 @@ public class CitiRewardBalanceConfiguration {
 			} else {
 				throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 			}
+			
  
+			
 			/*
 			 * Putting all the properties in a map
 			 */

@@ -3,6 +3,7 @@ package io.city.core.api.auth.url;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import okio.Buffer;
 
 import com.cuckoo.core.constant.ApplicationConstant;
 
@@ -70,6 +71,7 @@ public abstract class SendCityRequest {
 			System.out.println("request :" + request.toString());
 			System.out.println("request headers :" + request.headers());
 			System.out.println("request url :" + request.url());
+			System.out.println("request url :" + stringifyRequestBody(request));
 			Response response = client.newCall(request).execute();
 			return response.body().string();
 		} else {
@@ -90,6 +92,17 @@ public abstract class SendCityRequest {
 			System.out.println("Exception " + ex);
 		}
 		return headerProperties;
+	}
+	
+	private static String stringifyRequestBody(Request request) {
+	    try {
+	        final Request copy = request.newBuilder().build();
+	        final Buffer buffer = new Buffer();
+	        copy.body().writeTo(buffer);
+	        return buffer.readUtf8();
+	    } catch (final IOException e) {
+	        return "did not work";
+	    }
 	}
 
 }
