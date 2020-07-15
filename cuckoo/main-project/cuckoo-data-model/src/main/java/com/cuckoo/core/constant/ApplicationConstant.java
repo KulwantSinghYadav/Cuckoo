@@ -24,4 +24,24 @@ public class ApplicationConstant {
 
 	public static final MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
 
+	public static final String Get_Citi_Reward_Linkage_Body = "{\r\n" + 
+			"  \"rewardProgram\": \"THANKU\",\r\n" + 
+			"  \"merchantCode\": \"FLOWR\",\r\n" + 
+			"  \"cloakedCreditCardNumber\": \"c88b3dbf7f7546c90523fe046ae5aa8639fb2dab2d8e5f4c3cc9351f99ef963086bf854bcaa6924a524a18a6c90817fc21b192c3694180a0a99ae8c1f5e68da0\",\r\n" + 
+			"  \"billingZipCode\": \"12345\"\r\n" + 
+			"}";
+
+	public static final String Get_Citi_Reward_Redemption_Body = "{\r\n" + 
+			"  \"rewardProgram\": \"THANKU\",\r\n" + 
+			"  \"cloakedCreditCardNumber\": \"c88b3dbf7f7546c90523fe046ae5aa8639fb2dab2d8e5f4c3cc9351f99ef963086bf854bcaa6924a524a18a6c90817fc21b192c3694180a0a99ae8c1f5e68da0\",\r\n" + 
+			"  \"rewardLinkCode\": \"998OB390B502W4G4PQIMGP8P4155378GM4SQ3ORF418134ST\",\r\n" + 
+			"  \"merchantCode\": \"FLOWR\",\r\n" + 
+			"  \"transactionReferenceNumber\": \"12345\",\r\n" + 
+			"  \"redemptionOrder\": {\r\n" + 
+			"    \"transactionAmount\": 10.5,\r\n" + 
+			"    \"pointsToRedeem\": 1000,\r\n" + 
+			"    \"transactionDescription\": \"Coffee\"\r\n" + 
+			"  }\r\n" + 
+			"}";
+
 }

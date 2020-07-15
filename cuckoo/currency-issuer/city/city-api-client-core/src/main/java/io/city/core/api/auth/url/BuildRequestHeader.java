@@ -1,8 +1,11 @@
 package io.city.core.api.auth.url;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import io.city.core.api.client.reward.auth.CallAuthorization;
 
 public class BuildRequestHeader implements HeaderProvider {
 
@@ -11,13 +14,18 @@ public class BuildRequestHeader implements HeaderProvider {
 	public Map<String, String> buildRewardHearder(Map<String, String> headerValues) {
 
 		Map<String, String> requestHeaderValue = new HashMap<>();
+		CallAuthorization authToken = new CallAuthorization();
 		
 		requestHeaderValue.put("client_id", headerValues.get("clientId"));
 		requestHeaderValue.put("uuid", UUID.randomUUID().toString());
 		requestHeaderValue.put("content-type", headerValues.get("contentType"));
 		requestHeaderValue.put("countrycode", headerValues.get("countryCode"));
 		requestHeaderValue.put("businesscode", headerValues.get("businessCode"));
-		requestHeaderValue.put("authorization", headerValues.get("authorization"));
+		try {
+			requestHeaderValue.put("authorization", authToken.callAuthorization());
+		} catch (IOException e) {
+			System.out.println("Someting went wrong :" +e);
+		}
 		requestHeaderValue.put("accept-language", headerValues.get("acceptLanguage"));
 		requestHeaderValue.put("accept", headerValues.get("accept"));
 
@@ -36,4 +44,10 @@ public class BuildRequestHeader implements HeaderProvider {
 		return requestHeaderValue;
 	}
 	//Create the authorization api calling process in City-reward application with their separate request creation technique.
+
+	@Override
+	public String setUrlPattern(String url, String vi, String apiProduct, String endpoint) {
+		return url.concat("/").concat(vi.concat("/")).concat(apiProduct.concat("/")).concat(endpoint);
+	}
+	
 }

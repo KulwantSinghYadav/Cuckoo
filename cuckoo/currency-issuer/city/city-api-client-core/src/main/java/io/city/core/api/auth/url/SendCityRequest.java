@@ -3,6 +3,9 @@ package io.city.core.api.auth.url;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.json.JSONObject;
+
 import okio.Buffer;
 
 import com.cuckoo.core.constant.ApplicationConstant;
@@ -52,7 +55,7 @@ public abstract class SendCityRequest {
 		}
 	}
 
-	public String sendAuthApiRequest(String authUrl, Map<String, String> buildRewardHearder, String method,
+	public String sendPostRequest(String authUrl, Map<String, String> buildRewardHearder,
 			RequestBody body) throws IOException {
 
 		OkHttpClient client = new OkHttpClient();
@@ -103,6 +106,15 @@ public abstract class SendCityRequest {
 	    } catch (final IOException e) {
 	        return "did not work";
 	    }
+	}
+	
+	public String getAuthorisationToken(String response) {
+		JSONObject obj = new JSONObject(response);
+        String access_token = obj.getString("access_token");
+        String token_type = obj.getString("token_type");
+        String authorisation = token_type.concat(" " + access_token);
+        System.out.println("Client Authorization for API :" + authorisation);
+		return authorisation;
 	}
 
 }

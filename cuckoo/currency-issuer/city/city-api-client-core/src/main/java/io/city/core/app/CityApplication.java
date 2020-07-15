@@ -10,6 +10,8 @@ import io.city.core.api.client.reward.CallCitiRewardBalance;
 import io.city.core.api.client.reward.auth.CallAuthorization;
 import io.city.core.api.client.reward.eligibility.CallCitiRewardEligibility;
 import io.city.core.api.client.reward.enablement.CallCitiRewardEnablement;
+import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
+import io.city.core.api.client.reward.redemption.CallCitiRewardRedemption;
 
 @SpringBootApplication
 @ComponentScan("io")
@@ -44,6 +46,14 @@ public class CityApplication  implements ApplicationRunner{
 		System.out.println();
 		CallAuthorization authorizationToken = new CallAuthorization();
 		authorizationToken.callAuthorization();
+		
+		System.out.println();
+		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
+		callCitiRewardLinkage.callCityRewardLinkage();
+		
+		System.out.println();
+		CallCitiRewardRedemption callCitiRewardRedemption = new CallCitiRewardRedemption();
+		callCitiRewardRedemption.callCityRewardRedemption();
 		
 	}
 }
