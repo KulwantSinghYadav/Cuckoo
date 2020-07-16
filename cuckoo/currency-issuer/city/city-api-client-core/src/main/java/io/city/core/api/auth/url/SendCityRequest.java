@@ -46,8 +46,6 @@ public abstract class SendCityRequest {
 		if (builder != null) {
 			Request request = builder.build();
 			System.out.println("request :" + request.toString());
-			System.out.println("request headers :" + request.headers());
-			System.out.println("request url :" + request.url());
 			Response response = client.newCall(request).execute();
 			return response.body().string();
 		} else {
@@ -72,10 +70,6 @@ public abstract class SendCityRequest {
 		}
 		if (builder != null) {
 			Request request = builder.build();
-			System.out.println("request :" + request.toString());
-			System.out.println("request headers :" + request.headers());
-			System.out.println("request url :" + request.url());
-			System.out.println("request url :" + stringifyRequestBody(request));
 			Response response = client.newCall(request).execute();
 			return response.body().string();
 		} else {
@@ -116,7 +110,6 @@ public abstract class SendCityRequest {
         String access_token = obj.getString("access_token");
         String token_type = obj.getString("token_type");
         String authorisation = token_type.concat(" " + access_token);
-        System.out.println("Client Authorization for API :" + authorisation);
 		return authorisation;
 	}
 

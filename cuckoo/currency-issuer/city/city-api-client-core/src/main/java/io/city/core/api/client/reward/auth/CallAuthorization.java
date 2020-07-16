@@ -29,9 +29,6 @@ public class CallAuthorization extends SendCityRequest{
     	
     	//call the city Authorization api by passing requied parameters.
     	String response = sendApiRequest(authUrl, headerProvider.buildAuthorization(headerValues),body);
-
-		System.out.println("Client Authorization Response :" + response);
-		
 		return getAuthorisationToken(response);
 	}
 
