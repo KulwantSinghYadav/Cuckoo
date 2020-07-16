@@ -6,10 +6,9 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.model.core.constant.ApplicationConstant;
+
 import okio.Buffer;
-
-import com.cuckoo.core.constant.ApplicationConstant;
-
 import io.city.core.api.configuration.CitiRewardBalanceConfiguration;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -19,6 +18,7 @@ import okhttp3.Response;
 
 public abstract class SendCityRequest {
 
+	//This function is used for sending the request to the External-API's with Get and Put method.
 	public String sendApiRequest(String url, Map<String, String> buildRewardHearder,
 			Map<String, String> queryParameters, String method, String body) throws IOException {
 
@@ -55,7 +55,8 @@ public abstract class SendCityRequest {
 		}
 	}
 
-	public String sendPostRequest(String authUrl, Map<String, String> buildRewardHearder,
+	//This function is used for sending the request to the External-API's with Post method.
+	public String sendApiRequest(String authUrl, Map<String, String> buildRewardHearder,
 			RequestBody body) throws IOException {
 
 		OkHttpClient client = new OkHttpClient();
@@ -97,6 +98,7 @@ public abstract class SendCityRequest {
 		return headerProperties;
 	}
 	
+	//This function is used to return request URL of Authorization API.
 	private static String stringifyRequestBody(Request request) {
 	    try {
 	        final Request copy = request.newBuilder().build();
@@ -108,6 +110,7 @@ public abstract class SendCityRequest {
 	    }
 	}
 	
+	//This function is used  to get Authorization token value.
 	public String getAuthorisationToken(String response) {
 		JSONObject obj = new JSONObject(response);
         String access_token = obj.getString("access_token");

@@ -3,6 +3,7 @@ package io.city.core.app;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -14,7 +15,8 @@ import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
 import io.city.core.api.client.reward.redemption.CallCitiRewardRedemption;
 
 @SpringBootApplication
-@ComponentScan("io")
+@EnableAutoConfiguration
+@ComponentScan(basePackages = { "io.city.core", "com.model.core" })
 public class CityApplication  implements ApplicationRunner{
 	
 	/*

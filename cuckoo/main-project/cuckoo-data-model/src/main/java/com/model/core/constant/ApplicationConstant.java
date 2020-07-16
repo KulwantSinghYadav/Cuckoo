@@ -1,4 +1,4 @@
-package com.cuckoo.core.constant;
+package com.model.core.constant;
 
 import okhttp3.MediaType;
 

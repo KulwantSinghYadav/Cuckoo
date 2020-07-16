@@ -22,7 +22,7 @@ public class CallCitiRewardEligibility extends SendCityRequest  {
 		String url = setUrlPattern(headerValues);
 		Map<String, String> queryParameters = setQueryParameter(headerValues);
 
-		String response = sendApiRequest(url, headerProvider.buildRewardHearder(headerValues), queryParameters,"get","");
+		String response = sendApiRequest(url, headerProvider.buildRewardHearder(), queryParameters,"get","");
 
 		System.out.println("Client Reward Eligibility :"+ response);
 		

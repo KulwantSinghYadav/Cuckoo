@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import com.cuckoo.core.constant.ApplicationConstant;
+import com.model.core.constant.ApplicationConstant;
 
 import io.aexp.api.client.core.pay.reward.PayWithRewardsClient;
 

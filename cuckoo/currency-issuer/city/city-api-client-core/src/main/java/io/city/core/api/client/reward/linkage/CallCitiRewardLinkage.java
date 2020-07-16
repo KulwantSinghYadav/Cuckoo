@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.cuckoo.core.constant.ApplicationConstant;
+import com.model.core.constant.ApplicationConstant;
 
 import io.city.core.api.auth.url.BuildRequestHeader;
 import io.city.core.api.auth.url.HeaderProvider;
@@ -26,7 +26,7 @@ public class CallCitiRewardLinkage extends SendCityRequest {
 
 
 		//call the city reward linkage api by passing requied parameters.
-		String response = sendPostRequest(url, headerProvider.buildRewardHearder(headerValues),body);
+		String response = sendApiRequest(url, headerProvider.buildRewardHearder(),body);
 
 		System.out.println("Client Reward Linkage :" + response);
 

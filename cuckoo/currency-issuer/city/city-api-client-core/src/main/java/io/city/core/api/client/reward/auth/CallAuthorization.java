@@ -28,15 +28,17 @@ public class CallAuthorization extends SendCityRequest{
     	RequestBody body = RequestBody.create(mediaType, getResponseBody(headerValues));
     	
     	//call the city Authorization api by passing requied parameters.
-    	String response = sendPostRequest(authUrl, headerProvider.buildAuthorization(headerValues),body);
+    	String response = sendApiRequest(authUrl, headerProvider.buildAuthorization(headerValues),body);
 
 		System.out.println("Client Authorization Response :" + response);
 		
 		return getAuthorisationToken(response);
 	}
 
+    /*
+     * This function is used to set response body.
+     */
 	private String getResponseBody(Map<String, String> headerValues) {
-
 		 String authScope =  headerValues.get("authScope");
     	 return "grant_type=".concat("client_credentials").concat("&scope=").concat(authScope);
 	}

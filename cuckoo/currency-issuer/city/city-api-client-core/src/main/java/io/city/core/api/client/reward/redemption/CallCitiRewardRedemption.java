@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.cuckoo.core.constant.ApplicationConstant;
+import com.model.core.constant.ApplicationConstant;
 
 import io.city.core.api.auth.url.BuildRequestHeader;
 import io.city.core.api.auth.url.HeaderProvider;
@@ -25,7 +25,7 @@ public class CallCitiRewardRedemption extends SendCityRequest {
 		String url = headerProvider.setUrlPattern(headerValues.get("cityRewardUrl"),headerValues.get("vi"),headerValues.get("apiProduct"),headerValues.get("redemptionEndpoint"));
 
 		//call the city reward redemption api by passing requied parameters.
-		String response = sendPostRequest(url , headerProvider.buildRewardHearder(headerValues),body);
+		String response = sendApiRequest(url , headerProvider.buildRewardHearder(),body);
 
 		System.out.println("Client Reward Redemption :" + response);
 

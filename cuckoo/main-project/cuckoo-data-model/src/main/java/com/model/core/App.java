@@ -1,4 +1,4 @@
-package com.cuckoo.core;
+package com.model.core;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
