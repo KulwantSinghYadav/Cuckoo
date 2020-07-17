@@ -1,31 +1,40 @@
 package io.city.core.api.client.reward.redemption;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.cuckoo.core.api.config.BuildRequestApi;
+import com.cuckoo.core.api.config.BuildRequestHeader;
+import com.cuckoo.core.api.config.HeaderBuilder;
+import com.cuckoo.core.property.config.ConfigurationKeys;
+import com.cuckoo.core.property.config.ConfigurationProvider;
+import com.cuckoo.core.property.config.PropertyConfiguration;
 import com.model.core.constant.ApplicationConstant;
 
-import io.city.core.api.auth.url.BuildRequestHeader;
-import io.city.core.api.auth.url.HeaderProvider;
-import io.city.core.api.auth.url.SendCityRequest;
 import okhttp3.RequestBody;
 
 @Component
-public class CallCitiRewardRedemption extends SendCityRequest {
+public class CallCitiRewardRedemption extends BuildRequestApi {
 
 	public String callCityRewardRedemption() throws IOException {
-		HeaderProvider headerProvider = new BuildRequestHeader();
 
-		Map<String, String> headerValues = getHeaderProerties();
-		RequestBody body = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE, ApplicationConstant.Get_Citi_Reward_Redemption_Body);
+		HeaderBuilder headerProvider = new BuildRequestHeader();
+		PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
+		ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
 
-		String url = headerProvider.setUrlPattern(headerValues.get("cityRewardUrl"),headerValues.get("vi"),headerValues.get("apiProduct"),headerValues.get("redemptionEndpoint"));
+		RequestBody body = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE,
+				ApplicationConstant.Get_Citi_Reward_Redemption_Body);
 
-		//call the city reward redemption api by passing requied parameters.
-		String response = sendApiRequest(url , headerProvider.buildRewardHearder(),body);
+		String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
+				configurationProvider.getValue(ConfigurationKeys.VI),
+				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
+				configurationProvider.getValue(ConfigurationKeys.REDEMPTION_END_POINT));
+		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
+		
+		// call the city reward redemption api by passing requied parameters.
+		String response = sendApiRequest(url, buildRequestHearder, body);
 
 		System.out.println("Client Reward Redemption :" + response);
 

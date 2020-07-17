@@ -1,48 +1,45 @@
 package io.city.core.api.client.reward.eligibility;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import io.city.core.api.auth.url.BuildRequestHeader;
-import io.city.core.api.auth.url.HeaderProvider;
-import io.city.core.api.auth.url.SendCityRequest;
-import okhttp3.RequestBody;
+import com.cuckoo.core.api.config.BuildRequestApi;
+import com.cuckoo.core.api.config.BuildRequestHeader;
+import com.cuckoo.core.api.config.HeaderBuilder;
+import com.cuckoo.core.api.config.RequestBuilder;
+import com.cuckoo.core.property.config.ConfigurationKeys;
+import com.cuckoo.core.property.config.ConfigurationProvider;
+import com.cuckoo.core.property.config.PropertyConfiguration;
+
+import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
 
 @Component
-public class CallCitiRewardEligibility extends SendCityRequest  {
+public class CallCitiRewardEligibility extends BuildRequestApi  {
 
 	public String callCityRewardEligibility() throws IOException {
-		HeaderProvider headerProvider = new BuildRequestHeader();
+		
+		HeaderBuilder headerProvider = new BuildRequestHeader();
+		PropertyConfiguration propertyConfiguration = new PropertyConfiguration(); 
+		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
+		ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
+		RequestBuilder requestBuilder = new BuildRequestApi();
+		String requestMethod = "get";
+		String requestBody = "";
 
-		Map<String, String> headerValues = getHeaderProerties();
-
-		String url = setUrlPattern(headerValues);
-		Map<String, String> queryParameters = setQueryParameter(headerValues);
-
-		String response = sendApiRequest(url, headerProvider.buildRewardHearder(), queryParameters,"get","");
+		String rewardLinkCode = callCitiRewardLinkage.callCityRewardLinkage();
+		String url = headerProvider.setEligibilityQueryParameter(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL), configurationProvider.getValue(ConfigurationKeys.VI),
+				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT), configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_ELIGIBILITY_PATH), configurationProvider.getValue(ConfigurationKeys.ELIGIBILITY_END_POINT));
+		 Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
+		 Map<String, String> setQueryParameter = requestBuilder.setQueryParameter(configurationProvider,rewardLinkCode);
+		 
+		String response = sendApiRequest(url, buildRequestHearder, setQueryParameter,requestMethod,requestBody);
 
 		System.out.println("Client Reward Eligibility :"+ response);
 		
 		return response;
 
-	}
-
-	private String setUrlPattern(Map<String, String> headerValues) {
-
-		return headerValues.get("cityRewardUrl").concat("/").concat(headerValues.get("vi").concat("/"))
-				.concat(headerValues.get("apiProduct").concat("/")).concat(headerValues.get("cityRewardEligibilityPath").concat("/")).concat(headerValues.get("eligibilityEndpoint"));
-	}
-
-	private Map<String, String> setQueryParameter(Map<String, String> headerValues) {
-
-		Map<String, String> queryParameters = new LinkedHashMap<>();
-		queryParameters.put("merchantCode", headerValues.get("merchantCode"));
-		queryParameters.put("rewardProgram", headerValues.get("rewardProgram"));
-
-		return queryParameters;
 	}
 
 }

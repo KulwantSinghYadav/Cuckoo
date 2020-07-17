@@ -6,26 +6,36 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.cuckoo.core.api.config.BuildRequestApi;
+import com.cuckoo.core.api.config.BuildRequestHeader;
+import com.cuckoo.core.api.config.HeaderBuilder;
+import com.cuckoo.core.property.config.ConfigurationKeys;
+import com.cuckoo.core.property.config.ConfigurationProvider;
+import com.cuckoo.core.property.config.PropertyConfiguration;
 import com.model.core.constant.ApplicationConstant;
 
-import io.city.core.api.auth.url.BuildRequestHeader;
-import io.city.core.api.auth.url.HeaderProvider;
-import io.city.core.api.auth.url.SendCityRequest;
-
 @Component
-public class CallCitiRewardEnablement extends SendCityRequest {
+public class CallCitiRewardEnablement extends BuildRequestApi {
 
 	public String callCityRewardEnablement() throws IOException {
-		HeaderProvider headerProvider = new BuildRequestHeader();
 
-		Map<String, String> headerValues = getHeaderProerties();
+		HeaderBuilder headerProvider = new BuildRequestHeader();
+		PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
+		ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
+		String requestMethod = "put";
+		String requestBody = ApplicationConstant.Get_Citi_Reward_Enablement_Body;
 
-		String url = headerProvider.setUrlPattern(headerValues.get("cityRewardUrl"),headerValues.get("vi"),headerValues.get("apiProduct"),headerValues.get("enablementEndpoint"));
+
+		String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
+				configurationProvider.getValue(ConfigurationKeys.VI),
+				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
+				configurationProvider.getValue(ConfigurationKeys.ENABLEMENT_END_POINT));
+		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
 		Map<String, String> queryParameters = new HashMap<String, String>();
-		String body = ApplicationConstant.Get_Citi_Reward_Enablement_Body;
+		
 
-		//call the city reward enablement api by passing requied parameters.
-		String response = sendApiRequest(url, headerProvider.buildRewardHearder(),queryParameters,"put",body);
+		// call the city reward enablement api by passing requied parameters.
+		String response = sendApiRequest(url, buildRequestHearder, queryParameters, requestMethod, requestBody);
 
 		System.out.println("Client Reward Enablement :" + response);
 

@@ -1,32 +1,39 @@
 package io.city.core.api.client.reward.linkage;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.cuckoo.core.api.config.BuildRequestApi;
+import com.cuckoo.core.api.config.BuildRequestHeader;
+import com.cuckoo.core.api.config.HeaderBuilder;
+import com.cuckoo.core.property.config.ConfigurationKeys;
+import com.cuckoo.core.property.config.ConfigurationProvider;
+import com.cuckoo.core.property.config.PropertyConfiguration;
 import com.model.core.constant.ApplicationConstant;
 
-import io.city.core.api.auth.url.BuildRequestHeader;
-import io.city.core.api.auth.url.HeaderProvider;
-import io.city.core.api.auth.url.SendCityRequest;
 import okhttp3.RequestBody;
 
 @Component
-public class CallCitiRewardLinkage extends SendCityRequest {
+public class CallCitiRewardLinkage extends BuildRequestApi {
 
 	public String callCityRewardLinkage() throws IOException {
-		HeaderProvider headerProvider = new BuildRequestHeader();
 
-		Map<String, String> headerValues = getHeaderProerties();
-		RequestBody body = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE, ApplicationConstant.Get_Citi_Reward_Linkage_Body);
+		HeaderBuilder headerProvider = new BuildRequestHeader();
+		PropertyConfiguration propertyConfiguration = new PropertyConfiguration(); 
+		ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
+		
+		RequestBody requestBody = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE, ApplicationConstant.Get_Citi_Reward_Linkage_Body);
 
-		String url = headerProvider.setUrlPattern(headerValues.get("cityRewardUrl"),headerValues.get("vi"),headerValues.get("apiProduct"),headerValues.get("linkageEndpoint"));
-
+		String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
+				configurationProvider.getValue(ConfigurationKeys.VI),
+				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
+				configurationProvider.getValue(ConfigurationKeys.LINKAGEEND_POINT));
+		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
 
 		//call the city reward linkage api by passing requied parameters.
-		String response = sendApiRequest(url, headerProvider.buildRewardHearder(),body);
+		String response = sendApiRequest(url,buildRequestHearder,requestBody);
 
 		System.out.println("Client Reward Linkage :" + response);
 

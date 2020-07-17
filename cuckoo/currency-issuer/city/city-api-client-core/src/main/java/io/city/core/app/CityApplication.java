@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.cuckoo.core.client.auth.CallAuthorization;
+
 import io.city.core.api.client.reward.CallCitiRewardBalance;
-import io.city.core.api.client.reward.auth.CallAuthorization;
 import io.city.core.api.client.reward.eligibility.CallCitiRewardEligibility;
 import io.city.core.api.client.reward.enablement.CallCitiRewardEnablement;
 import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
@@ -32,6 +33,10 @@ public class CityApplication  implements ApplicationRunner{
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		
+		System.out.println();
+		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
+		callCitiRewardLinkage.callCityRewardLinkage();
 
 		System.out.println();
 		CallCitiRewardBalance callCitiRewardBalance = new CallCitiRewardBalance();
@@ -48,10 +53,6 @@ public class CityApplication  implements ApplicationRunner{
 		System.out.println();
 		CallAuthorization authorizationToken = new CallAuthorization();
 		authorizationToken.callAuthorization();
-		
-		System.out.println();
-		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
-		callCitiRewardLinkage.callCityRewardLinkage();
 		
 		System.out.println();
 		CallCitiRewardRedemption callCitiRewardRedemption = new CallCitiRewardRedemption();

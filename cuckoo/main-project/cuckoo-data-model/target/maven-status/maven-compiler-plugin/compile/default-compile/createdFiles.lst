@@ -1,2 +1,2 @@
-com\cuckoo\core\App.class
-com\cuckoo\core\constant\ApplicationConstant.class
+com\model\core\App.class
+com\model\core\constant\ApplicationConstant.class

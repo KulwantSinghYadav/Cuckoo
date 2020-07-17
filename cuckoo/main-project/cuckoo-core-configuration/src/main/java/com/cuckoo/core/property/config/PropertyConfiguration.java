@@ -1,0 +1,17 @@
+package com.cuckoo.core.property.config;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+public class PropertyConfiguration{
+	
+	public ConfigurationProvider loadProperties() throws IOException{
+		String propertiesFileName = "application.properties";
+		PropertiesConfigurationProvider provider = new PropertiesConfigurationProvider();
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertiesFileName);
+        provider.loadProperties(inputStream);
+    	ConfigurationProvider configurationProvider = provider;
+        return configurationProvider;
+	}
+
+}
