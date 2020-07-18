@@ -6,12 +6,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.cuckoo.core.api.config.BuildRequestApi;
-import com.cuckoo.core.api.config.BuildRequestHeader;
-import com.cuckoo.core.api.config.HeaderBuilder;
-import com.cuckoo.core.property.config.ConfigurationKeys;
-import com.cuckoo.core.property.config.ConfigurationProvider;
-import com.cuckoo.core.property.config.PropertyConfiguration;
+import com.cuckoo.config.api.config.BuildRequestApi;
+import com.cuckoo.config.api.config.BuildRequestHeader;
+import com.cuckoo.config.api.config.HeaderBuilder;
+import com.cuckoo.config.property.config.ConfigurationKeys;
+import com.cuckoo.config.property.config.ConfigurationProvider;
+import com.cuckoo.config.property.config.PropertyConfiguration;
 import com.model.core.constant.ApplicationConstant;
 
 @Component

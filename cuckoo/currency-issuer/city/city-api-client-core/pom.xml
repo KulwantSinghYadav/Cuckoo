@@ -39,9 +39,11 @@
 			<artifactId>cuckoo-data-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- <dependency> <groupId>com.cuckoo.core</groupId> <artifactId>cuckoo-core-configuration</artifactId> 
+			<version>0.0.1-SNAPSHOT</version> </dependency> -->
 		<dependency>
-			<groupId>com.cuckoo.core</groupId>
-			<artifactId>cuckoo-core-configuration</artifactId>
+			<groupId>cuckoo.core.config.utills</groupId>
+			<artifactId>cuckoo-core-config-utills</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

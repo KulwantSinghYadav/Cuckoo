@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.cuckoo.core.client.auth.CallAuthorization;
+import com.cuckoo.config.client.auth.CallAuthorization;
 
 import io.city.core.api.client.reward.CallCitiRewardBalance;
 import io.city.core.api.client.reward.eligibility.CallCitiRewardEligibility;
@@ -17,9 +17,9 @@ import io.city.core.api.client.reward.redemption.CallCitiRewardRedemption;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan(basePackages = { "io.city.core", "com.model.core" })
-public class CityApplication  implements ApplicationRunner{
-	
+@ComponentScan(basePackages = { "io.city.core", "com.model.core", "com.cuckoo.config" })
+public class CityApplication implements ApplicationRunner {
+
 	/*
 	 * ApplicationRunner is used when you want to execute some piece of code exactly
 	 * before the application startup completes, you can use it then. In one of our
@@ -30,10 +30,10 @@ public class CityApplication  implements ApplicationRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(CityApplication.class, args);
 	}
-	
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		
+
 		System.out.println();
 		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
 		callCitiRewardLinkage.callCityRewardLinkage();
@@ -41,22 +41,23 @@ public class CityApplication  implements ApplicationRunner{
 		System.out.println();
 		CallCitiRewardBalance callCitiRewardBalance = new CallCitiRewardBalance();
 		callCitiRewardBalance.callCityReward();
-		
+
 		System.out.println();
 		CallCitiRewardEligibility callCitiRewardEligibility = new CallCitiRewardEligibility();
 		callCitiRewardEligibility.callCityRewardEligibility();
-		
+
 		System.out.println();
 		CallCitiRewardEnablement callCitiRewardEnablement = new CallCitiRewardEnablement();
 		callCitiRewardEnablement.callCityRewardEnablement();
-		
-		System.out.println();
-		CallAuthorization authorizationToken = new CallAuthorization();
-		authorizationToken.callAuthorization();
-		
+
+		/*
+		 * System.out.println(); CallAuthorization authorizationToken = new
+		 * CallAuthorization(); authorizationToken.callAuthorization();
+		 */
+
 		System.out.println();
 		CallCitiRewardRedemption callCitiRewardRedemption = new CallCitiRewardRedemption();
 		callCitiRewardRedemption.callCityRewardRedemption();
-		
+
 	}
 }

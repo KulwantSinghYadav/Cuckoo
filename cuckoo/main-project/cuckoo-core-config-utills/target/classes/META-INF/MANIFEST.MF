@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Title: Modern Java RPC stack using Jetty+Jersey+Jackson
+ +MessagePack (from https://github.com/making/msgpack-rpc-jersey-blank
+ )
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Hema Malik
+Implementation-Vendor-Id: cuckoo.core.config.utills
+Build-Jdk: 1.8.0_144
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: cuckoo.core.config.utills.app.App
+
