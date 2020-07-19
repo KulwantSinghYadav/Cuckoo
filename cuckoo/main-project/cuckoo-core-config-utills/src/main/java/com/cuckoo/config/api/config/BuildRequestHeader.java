@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import com.cuckoo.config.property.config.ConfigurationKeys;
 import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
 import com.cuckoo.dao.impl.AuthorizationDaoImpl;
+
 
 @Component
 public class BuildRequestHeader implements HeaderBuilder {
@@ -47,7 +49,11 @@ public class BuildRequestHeader implements HeaderBuilder {
 	public Map<String, String> buildAuthorization(ConfigurationProvider configurationProvider) {
 		Map<String, String> requestHeaderValue = new HashMap<>();
 
-		requestHeaderValue.put("authorization", configurationProvider.getValue(ConfigurationKeys.AUTHAUTHORIZATION));
+		String encodedAuth = "Basic " + Base64.getEncoder().encodeToString((configurationProvider.getValue(ConfigurationKeys.CLIENT_ID) + ":" + configurationProvider.getValue(ConfigurationKeys.CLIENT_SECRET)).getBytes());
+		System.out.println("Encoded Auth :" + encodedAuth);
+
+		requestHeaderValue.put("authorization", encodedAuth);
+		//requestHeaderValue.put("authorization", configurationProvider.getValue(ConfigurationKeys.AUTHAUTHORIZATION));
 		requestHeaderValue.put("content-type", configurationProvider.getValue(ConfigurationKeys.AUTHCONTENT_TYPE));
 		requestHeaderValue.put("accept", configurationProvider.getValue(ConfigurationKeys.ACCEPT));
 
