@@ -18,7 +18,7 @@ import okhttp3.RequestBody;
 @Component
 public class CallCitiRewardLinkage extends BuildRequestApi {
 
-	public String callCityRewardLinkage() throws IOException {
+	public String callCityRewardLinkage(String authToken) throws IOException {
 
 		HeaderBuilder headerProvider = new BuildRequestHeader();
 		PropertyConfiguration propertyConfiguration = new PropertyConfiguration(); 

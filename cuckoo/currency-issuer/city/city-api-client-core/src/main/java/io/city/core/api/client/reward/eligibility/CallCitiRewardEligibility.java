@@ -18,7 +18,7 @@ import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
 @Component
 public class CallCitiRewardEligibility extends BuildRequestApi  {
 
-	public String callCityRewardEligibility() throws IOException {
+	public String callCityRewardEligibility(String authToken) throws IOException {
 		
 		HeaderBuilder headerProvider = new BuildRequestHeader();
 		PropertyConfiguration propertyConfiguration = new PropertyConfiguration(); 
@@ -28,7 +28,7 @@ public class CallCitiRewardEligibility extends BuildRequestApi  {
 		String requestMethod = "get";
 		String requestBody = "";
 
-		String rewardLinkCode = callCitiRewardLinkage.callCityRewardLinkage();
+		String rewardLinkCode = callCitiRewardLinkage.callCityRewardLinkage(authToken);
 		String url = headerProvider.setEligibilityQueryParameter(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL), configurationProvider.getValue(ConfigurationKeys.VI),
 				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT), configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_ELIGIBILITY_PATH), configurationProvider.getValue(ConfigurationKeys.ELIGIBILITY_END_POINT));
 		 Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();

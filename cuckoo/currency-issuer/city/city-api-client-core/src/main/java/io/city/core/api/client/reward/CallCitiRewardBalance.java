@@ -18,7 +18,7 @@ import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
 @Component
 public class CallCitiRewardBalance {
 
-	public String callCityReward() throws IOException {
+	public String callCityReward(String authToken) throws IOException {
 
 		HeaderBuilder headerProvider = new BuildRequestHeader();
 		RequestBuilder requestBuilder = new BuildRequestApi();
@@ -28,7 +28,7 @@ public class CallCitiRewardBalance {
 		String requestMethod = "get";
 		String requestBody = "";
 
-		String rewardLinkCode = callCitiRewardLinkage.callCityRewardLinkage();
+		String rewardLinkCode = callCitiRewardLinkage.callCityRewardLinkage(authToken);
 		String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL), configurationProvider.getValue(ConfigurationKeys.VI),
 				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT), configurationProvider.getValue(ConfigurationKeys.ENDPOINT));
 		

@@ -36,19 +36,20 @@ public class CityApplication implements ApplicationRunner {
 
 		System.out.println();
 		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
-		callCitiRewardLinkage.callCityRewardLinkage();
+		String authToken = "";
+		callCitiRewardLinkage.callCityRewardLinkage(authToken);
 
 		System.out.println();
 		CallCitiRewardBalance callCitiRewardBalance = new CallCitiRewardBalance();
-		callCitiRewardBalance.callCityReward();
+		callCitiRewardBalance.callCityReward(authToken);
 
 		System.out.println();
 		CallCitiRewardEligibility callCitiRewardEligibility = new CallCitiRewardEligibility();
-		callCitiRewardEligibility.callCityRewardEligibility();
+		callCitiRewardEligibility.callCityRewardEligibility(authToken);
 
 		System.out.println();
 		CallCitiRewardEnablement callCitiRewardEnablement = new CallCitiRewardEnablement();
-		callCitiRewardEnablement.callCityRewardEnablement();
+		callCitiRewardEnablement.callCityRewardEnablement(authToken);
 
 		/*
 		 * System.out.println(); CallAuthorization authorizationToken = new
@@ -57,7 +58,7 @@ public class CityApplication implements ApplicationRunner {
 
 		System.out.println();
 		CallCitiRewardRedemption callCitiRewardRedemption = new CallCitiRewardRedemption();
-		callCitiRewardRedemption.callCityRewardRedemption();
+		callCitiRewardRedemption.callCityRewardRedemption(authToken);
 
 	}
 }

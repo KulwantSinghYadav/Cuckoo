@@ -17,7 +17,7 @@ import com.model.core.constant.ApplicationConstant;
 @Component
 public class CallCitiRewardEnablement extends BuildRequestApi {
 
-	public String callCityRewardEnablement() throws IOException {
+	public String callCityRewardEnablement(String authToken) throws IOException {
 
 		HeaderBuilder headerProvider = new BuildRequestHeader();
 		PropertyConfiguration propertyConfiguration = new PropertyConfiguration();

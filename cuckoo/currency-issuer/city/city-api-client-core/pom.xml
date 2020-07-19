@@ -20,6 +20,11 @@
 	</properties>
 
 	<dependencies>
+	 <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.3.156</version>
+    </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -39,8 +44,6 @@
 			<artifactId>cuckoo-data-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.cuckoo.core</groupId> <artifactId>cuckoo-core-configuration</artifactId> 
-			<version>0.0.1-SNAPSHOT</version> </dependency> -->
 		<dependency>
 			<groupId>cuckoo.core.config.utills</groupId>
 			<artifactId>cuckoo-core-config-utills</artifactId>
