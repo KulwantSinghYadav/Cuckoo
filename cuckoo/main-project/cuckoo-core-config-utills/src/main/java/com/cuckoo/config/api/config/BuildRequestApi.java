@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.cuckoo.config.property.config.CitiRewardBalanceConfiguration;
@@ -19,6 +20,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+@Component
 public class BuildRequestApi implements RequestBuilder {
 
 	// This function is used for sending the request to the External-API's with Get

@@ -5,12 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.cuckoo.config.client.auth.CallAuthorization;
 import com.cuckoo.config.property.config.ConfigurationKeys;
 import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
+import com.cuckoo.dao.impl.AuthorizationDaoImpl;
 
+@Component
 public class BuildRequestHeader implements HeaderBuilder {
+	
+//	@Autowired
+//	AuthorizationDaoImpl authorizationDaoImpl;
 
 	// Build request headre for Reward related API'S
 	@Override
@@ -26,6 +34,7 @@ public class BuildRequestHeader implements HeaderBuilder {
 		requestHeaderValue.put("content-type", configurationProvider.getValue(ConfigurationKeys.CONTENT_TYPE));
 		requestHeaderValue.put("countrycode", configurationProvider.getValue(ConfigurationKeys.COUNTRY_CODE));
 		requestHeaderValue.put("businesscode", configurationProvider.getValue(ConfigurationKeys.BUSINESS_CODE));
+//		requestHeaderValue.put("authorization", authorizationDaoImpl.getAuthorizationToken());
 		requestHeaderValue.put("authorization", authToken.callAuthorization());
 		requestHeaderValue.put("accept-language", configurationProvider.getValue(ConfigurationKeys.ACCEPT_LANGUAGE));
 		requestHeaderValue.put("accept", configurationProvider.getValue(ConfigurationKeys.ACCEPT));

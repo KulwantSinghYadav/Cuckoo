@@ -1,5 +1,5 @@
 com\cuckoo\dao\generic\Dao.class
-com\cuckoo\dao\impl\CustomerDaoImpl.class
 com\cuckoo\dao\generic\DaoImpl.class
-com\cuckoo\dao\impl\CustomerDao.class
 com\cuckoo\dao\App.class
+com\cuckoo\dao\impl\AuthorizationDao.class
+com\cuckoo\dao\impl\AuthorizationDaoImpl.class
