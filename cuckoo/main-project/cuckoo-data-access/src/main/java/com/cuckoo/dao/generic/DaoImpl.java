@@ -3,13 +3,12 @@ package com.cuckoo.dao.generic;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Repository
 @Transactional
