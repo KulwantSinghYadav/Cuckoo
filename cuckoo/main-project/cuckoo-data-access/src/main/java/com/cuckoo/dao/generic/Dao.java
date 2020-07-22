@@ -18,5 +18,7 @@ public interface Dao<K, E> {
     List<E> findAll();
 
     public void rollBack();
+    
+    public Integer countAll();
  
 }

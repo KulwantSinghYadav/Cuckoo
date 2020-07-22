@@ -13,15 +13,13 @@ import com.cuckoo.config.client.auth.CallAuthorization;
 import com.cuckoo.config.property.config.ConfigurationKeys;
 import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
+import com.cuckoo.dao.impl.AuthorizationDao;
 import com.cuckoo.dao.impl.AuthorizationDaoImpl;
 
 
 @Component
 public class BuildRequestHeader implements HeaderBuilder {
 	
-//	@Autowired
-//	AuthorizationDaoImpl authorizationDaoImpl;
-
 	// Build request headre for Reward related API'S
 	@Override
 	public Map<String, String> buildRewardHearder() throws IOException {
@@ -36,7 +34,7 @@ public class BuildRequestHeader implements HeaderBuilder {
 		requestHeaderValue.put("content-type", configurationProvider.getValue(ConfigurationKeys.CONTENT_TYPE));
 		requestHeaderValue.put("countrycode", configurationProvider.getValue(ConfigurationKeys.COUNTRY_CODE));
 		requestHeaderValue.put("businesscode", configurationProvider.getValue(ConfigurationKeys.BUSINESS_CODE));
-//		requestHeaderValue.put("authorization", authorizationDaoImpl.getAuthorizationToken());
+//		requestHeaderValue.put("authorization", authToken.getAuthToken());
 		requestHeaderValue.put("authorization", authToken.callAuthorization());
 		requestHeaderValue.put("accept-language", configurationProvider.getValue(ConfigurationKeys.ACCEPT_LANGUAGE));
 		requestHeaderValue.put("accept", configurationProvider.getValue(ConfigurationKeys.ACCEPT));
@@ -46,10 +44,9 @@ public class BuildRequestHeader implements HeaderBuilder {
 
 	// Build request header of Authorization API
 	@Override
-	public Map<String, String> buildAuthorization(ConfigurationProvider configurationProvider) {
+	public Map<String, String> buildAuthorization(ConfigurationProvider configurationProvider, String encodedAuth) {
 		Map<String, String> requestHeaderValue = new HashMap<>();
 
-		String encodedAuth = "Basic " + Base64.getEncoder().encodeToString((configurationProvider.getValue(ConfigurationKeys.CLIENT_ID) + ":" + configurationProvider.getValue(ConfigurationKeys.CLIENT_SECRET)).getBytes());
 		System.out.println("Encoded Auth :" + encodedAuth);
 
 		requestHeaderValue.put("authorization", encodedAuth);

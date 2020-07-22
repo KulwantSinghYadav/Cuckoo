@@ -44,4 +44,8 @@ public class ApplicationConstant {
 			"  }\r\n" + 
 			"}";
 
+	public static final String Pending = "Pending";
+
+	public static final String Client_Credentials = "client_credentials";
+
 }

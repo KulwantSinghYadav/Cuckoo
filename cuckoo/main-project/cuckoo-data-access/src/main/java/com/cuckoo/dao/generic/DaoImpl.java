@@ -65,4 +65,12 @@ public abstract class DaoImpl<K, E> implements Dao<K, E>{
 		Query q = (Query) entityManager.createQuery(query);
         return ((javax.persistence.Query) q).getResultList();
 	}
+	
+	@Transactional(readOnly=true)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Integer countAll() {		
+		String query = "from " + entityClass.getName() + " c";
+		Query q = (Query) entityManager.createQuery(query);
+        return ((javax.persistence.Query) q).getResultList().size();
+	}
 }

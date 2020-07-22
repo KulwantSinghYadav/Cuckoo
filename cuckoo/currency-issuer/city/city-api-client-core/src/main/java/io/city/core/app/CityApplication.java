@@ -7,9 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.cuckoo.config.client.auth.CallAuthorization;
-
-import io.city.core.api.client.reward.CallCitiRewardBalance;
+import io.city.core.api.client.reward.balance.CallCitiRewardBalance;
 import io.city.core.api.client.reward.eligibility.CallCitiRewardEligibility;
 import io.city.core.api.client.reward.enablement.CallCitiRewardEnablement;
 import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;

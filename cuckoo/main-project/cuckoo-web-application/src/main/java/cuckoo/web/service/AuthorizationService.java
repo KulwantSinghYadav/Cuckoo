@@ -19,7 +19,7 @@ public class AuthorizationService {
 		String authToken = null;
 
 		try {
-			authToken = authorizationDao.saveAuthorizationToken();
+			authToken = authorizationDao.getAuthorizationToken();
 		} catch (Exception e) {
 		}
 

@@ -17,10 +17,19 @@ import javax.persistence.Table;
 public class Authorization {
 
 	@Id
-	@Column(name = "id", nullable = false, insertable = true, updatable = true, columnDefinition = "int default 0")
+	@Column(name = "trans_id", nullable = false, insertable = true, updatable = true, columnDefinition = "int default 0")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	int transId;
 
+	@Column(name = "auth_url", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String authUrl;
+	
+	@Column(name = "authorization_base", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String authorizationBase;
+	
+	@Column(name = "grant_type", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String grantType;
+	
 	@Column(name = "access_token", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String accessToken;
 
@@ -32,6 +41,9 @@ public class Authorization {
 
 	@Column(name = "token_type", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String tokenType;
+	
+	@Column(name = "status", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String status;
 
 	@Column(name = "expires_in", nullable = false, insertable = true, updatable = true, columnDefinition = "int default 0")
 	String expiresIn;
@@ -46,12 +58,36 @@ public class Authorization {
 		super();
 	}
 
-	public int getId() {
-		return id;
+	public int getTransId() {
+		return transId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setTransId(int transId) {
+		this.transId = transId;
+	}
+
+	public String getAuthUrl() {
+		return authUrl;
+	}
+
+	public void setAuthUrl(String authUrl) {
+		this.authUrl = authUrl;
+	}
+
+	public String getAuthorizationBase() {
+		return authorizationBase;
+	}
+
+	public void setAuthorizationBase(String authorizationBase) {
+		this.authorizationBase = authorizationBase;
+	}
+
+	public String getGrantType() {
+		return grantType;
+	}
+
+	public void setGrantType(String grantType) {
+		this.grantType = grantType;
 	}
 
 	public String getAccessToken() {
@@ -84,6 +120,14 @@ public class Authorization {
 
 	public void setTokenType(String tokenType) {
 		this.tokenType = tokenType;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getExpiresIn() {

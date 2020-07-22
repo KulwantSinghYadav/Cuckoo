@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 
 import com.cuckoo.dao.generic.DaoImpl;
-import com.model.core.city.model.Authorization;
+import com.model.core.model.Authorization;
 
 @Component("authorizationDao")
 public class AuthorizationDaoImpl  extends DaoImpl<Integer , Authorization>  implements AuthorizationDao{
@@ -15,7 +15,19 @@ public class AuthorizationDaoImpl  extends DaoImpl<Integer , Authorization>  imp
 	private EntityManager entityManager;
 	
 	@Override
-	public String saveAuthorizationToken() {
+	public void saveRequestDetail(String authUrl, String encodedAuth, String status, String clientCredentials) {
+		Authorization authorization = new Authorization();
+    	authorization.setAuthUrl(authUrl);
+    	authorization.setAuthorizationBase(encodedAuth);
+    	authorization.setStatus(status);
+    	authorization.setGrantType(clientCredentials);
+    	entityManager.persist(authorization);
+	}
+
+	@Override
+	public String getAuthorizationToken() {
+		
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
