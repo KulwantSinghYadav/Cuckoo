@@ -15,7 +15,7 @@ public class CitiRewardBalanceReqResService {
 
 	@Autowired
 	CitiRewardBalanceReqResDao citiRewardBalanceReqResDao;
-
+	
 	@Transactional
 	public List<CitiRewardBalanceRequestResponse> getAllCitiRBReqRes() {
 		return citiRewardBalanceReqResDao.findAll();

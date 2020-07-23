@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.7.RELEASE</version>
+		<version>1.5.3.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -34,13 +34,13 @@
 			<version>3.7.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.cuckoo.core</groupId>
-			<artifactId>cuckoo-data-model</artifactId>
+			<groupId>com.data.access</groupId>
+			<artifactId>cuckoo-data-access</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.data.access</groupId>
-			<artifactId>cuckoo-data-access</artifactId>
+			<groupId>com.cuckoo.core</groupId>
+			<artifactId>cuckoo-data-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -99,6 +99,10 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<!-- <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId> 
+				<configuration> <executable>true</executable> </configuration> <executions> 
+				<execution> <goals> <goal>repackage</goal> </goals> </execution> </executions> 
+				</plugin> -->
 		</plugins>
 	</build>
 

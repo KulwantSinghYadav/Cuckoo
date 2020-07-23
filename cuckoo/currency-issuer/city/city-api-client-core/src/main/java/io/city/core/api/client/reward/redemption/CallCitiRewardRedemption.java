@@ -31,7 +31,7 @@ public class CallCitiRewardRedemption extends BuildRequestApi {
 				configurationProvider.getValue(ConfigurationKeys.VI),
 				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
 				configurationProvider.getValue(ConfigurationKeys.REDEMPTION_END_POINT));
-		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
+		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken);
 		
 		// call the city reward redemption api by passing requied parameters.
 		String response = sendApiRequest(url, buildRequestHearder, body);

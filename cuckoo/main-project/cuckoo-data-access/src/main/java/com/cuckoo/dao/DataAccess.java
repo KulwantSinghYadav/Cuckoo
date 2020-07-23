@@ -1,11 +1,11 @@
-package cuckoo.core.config.utills.app;
+package com.cuckoo.dao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class App {
+public class DataAccess {
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(DataAccess.class, args);
     }
 }

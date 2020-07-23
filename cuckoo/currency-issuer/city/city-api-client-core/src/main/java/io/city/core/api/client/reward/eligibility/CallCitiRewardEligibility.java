@@ -31,7 +31,7 @@ public class CallCitiRewardEligibility extends BuildRequestApi  {
 		String rewardLinkCode = callCitiRewardLinkage.callCityRewardLinkage(authToken);
 		String url = headerProvider.setEligibilityQueryParameter(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL), configurationProvider.getValue(ConfigurationKeys.VI),
 				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT), configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_ELIGIBILITY_PATH), configurationProvider.getValue(ConfigurationKeys.ELIGIBILITY_END_POINT));
-		 Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
+		 Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken);
 		 Map<String, String> setQueryParameter = requestBuilder.setQueryParameter(configurationProvider,rewardLinkCode);
 		 
 		String response = sendApiRequest(url, buildRequestHearder, setQueryParameter,requestMethod,requestBody);

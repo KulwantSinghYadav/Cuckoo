@@ -32,7 +32,7 @@ public class CallCitiRewardBalance {
 		String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL), configurationProvider.getValue(ConfigurationKeys.VI),
 				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT), configurationProvider.getValue(ConfigurationKeys.ENDPOINT));
 		
-		 Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
+		 Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken);
 		 Map<String, String> setQueryParameter = requestBuilder.setQueryParameter(configurationProvider,rewardLinkCode);
 
 		// call the city reward api by passing required parameters.

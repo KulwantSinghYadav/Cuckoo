@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cuckoo.config.client.auth.CallAuthorization;
 import com.model.core.model.city.CitiRewardBalanceRequestResponse;
 
+import cuckoo.web.service.AuthorizationService;
 import cuckoo.web.service.CitiRewardBalanceReqResService;
 import io.city.core.api.client.reward.balance.CallCitiRewardBalance;
 
@@ -22,8 +24,11 @@ import io.city.core.api.client.reward.balance.CallCitiRewardBalance;
 public class CitiReqResController {
 
 	@Autowired
-	CitiRewardBalanceReqResService citiRewardBalanceReqResService;
-
+	private CitiRewardBalanceReqResService citiRewardBalanceReqResService;
+	
+	@Autowired
+	AuthorizationService authorizationService;
+	
 	CallCitiRewardBalance callCitiRewardBalance = new CallCitiRewardBalance();
 	CallAuthorization callAuthorization = new CallAuthorization();
 
@@ -50,8 +55,8 @@ public class CitiReqResController {
 		 * below code is only for city reward balance api to check successfully
 		 * insertion of response data.
 		 */
-
-		String response = callCitiRewardBalance.callCityReward("");
+		String accessToken = authorizationService.getAuthorizationToken();
+		String response = callCitiRewardBalance.callCityReward(accessToken);
 
 		CitiRewardBalanceRequestResponse.setCreationTime(new Timestamp(System.currentTimeMillis()));
 		CitiRewardBalanceRequestResponse.setResponseData(response);

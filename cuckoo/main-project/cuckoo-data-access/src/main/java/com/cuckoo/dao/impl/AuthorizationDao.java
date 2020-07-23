@@ -7,5 +7,6 @@ public interface AuthorizationDao  extends Dao<Integer , Authorization> {
 	
 	public void saveRequestDetail(String authUrl, String encodedAuth, String status, String clientCredentials);
 	public String getAuthorizationToken();
+	public Authorization getTopRecord();
 
 }

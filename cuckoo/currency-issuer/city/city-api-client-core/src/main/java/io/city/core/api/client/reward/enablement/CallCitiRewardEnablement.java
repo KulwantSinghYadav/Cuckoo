@@ -30,7 +30,7 @@ public class CallCitiRewardEnablement extends BuildRequestApi {
 				configurationProvider.getValue(ConfigurationKeys.VI),
 				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
 				configurationProvider.getValue(ConfigurationKeys.ENABLEMENT_END_POINT));
-		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
+		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken);
 		Map<String, String> queryParameters = new HashMap<String, String>();
 		
 

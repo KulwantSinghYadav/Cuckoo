@@ -24,8 +24,8 @@ public class Authorization {
 	@Column(name = "auth_url", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String authUrl;
 	
-	@Column(name = "authorization_base", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
-	String authorizationBase;
+	@Column(name = "encoded_auth", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String encodedAuth;
 	
 	@Column(name = "grant_type", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String grantType;
@@ -33,20 +33,20 @@ public class Authorization {
 	@Column(name = "access_token", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String accessToken;
 
-	@Column(name = "refresh_token", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
-	String refreshToken;
-
 	@Column(name = "scope", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String scope;
 
 	@Column(name = "token_type", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String tokenType;
 	
-	@Column(name = "status", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
-	String status;
-
+	@Column(name = "authorisation", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String authorisation;
+	
+	@Column(name = "consented_on", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	Integer consentedOn;
+	
 	@Column(name = "expires_in", nullable = false, insertable = true, updatable = true, columnDefinition = "int default 0")
-	String expiresIn;
+	Integer expiresIn;
 
 	@Column(name = "creation_time", nullable = false, insertable = true, updatable = true, columnDefinition = "timestamp default now()")
 	Timestamp creationTime;
@@ -57,6 +57,7 @@ public class Authorization {
 	public Authorization() {
 		super();
 	}
+
 
 	public int getTransId() {
 		return transId;
@@ -72,14 +73,6 @@ public class Authorization {
 
 	public void setAuthUrl(String authUrl) {
 		this.authUrl = authUrl;
-	}
-
-	public String getAuthorizationBase() {
-		return authorizationBase;
-	}
-
-	public void setAuthorizationBase(String authorizationBase) {
-		this.authorizationBase = authorizationBase;
 	}
 
 	public String getGrantType() {
@@ -98,14 +91,6 @@ public class Authorization {
 		this.accessToken = accessToken;
 	}
 
-	public String getRefreshToken() {
-		return refreshToken;
-	}
-
-	public void setRefreshToken(String refreshToken) {
-		this.refreshToken = refreshToken;
-	}
-
 	public String getScope() {
 		return scope;
 	}
@@ -120,22 +105,6 @@ public class Authorization {
 
 	public void setTokenType(String tokenType) {
 		this.tokenType = tokenType;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getExpiresIn() {
-		return expiresIn;
-	}
-
-	public void setExpiresIn(String expiresIn) {
-		this.expiresIn = expiresIn;
 	}
 
 	public Timestamp getCreationTime() {
@@ -153,5 +122,43 @@ public class Authorization {
 	public void setExpiresTime(Timestamp expiresTime) {
 		this.expiresTime = expiresTime;
 	}
+
+	public String getEncodedAuth() {
+		return encodedAuth;
+	}
+
+	public void setEncodedAuth(String encodedAuth) {
+		this.encodedAuth = encodedAuth;
+	}
+
+
+	public Integer getConsentedOn() {
+		return consentedOn;
+	}
+
+
+	public void setConsentedOn(Integer consentedOn) {
+		this.consentedOn = consentedOn;
+	}
+
+
+	public Integer getExpiresIn() {
+		return expiresIn;
+	}
+
+
+	public void setExpiresIn(Integer expiresIn) {
+		this.expiresIn = expiresIn;
+	}
+
+	public String getAuthorisation() {
+		return authorisation;
+	}
+
+	public void setAuthorisation(String authorisation) {
+		this.authorisation = authorisation;
+	}
 	
+	
+
 }

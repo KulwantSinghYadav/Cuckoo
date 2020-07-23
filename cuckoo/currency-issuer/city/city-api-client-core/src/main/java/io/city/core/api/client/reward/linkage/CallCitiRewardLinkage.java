@@ -30,7 +30,7 @@ public class CallCitiRewardLinkage extends BuildRequestApi {
 				configurationProvider.getValue(ConfigurationKeys.VI),
 				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
 				configurationProvider.getValue(ConfigurationKeys.LINKAGEEND_POINT));
-		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder();
+		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken);
 
 		//call the city reward linkage api by passing requied parameters.
 		String response = sendApiRequest(url,buildRequestHearder,requestBody);

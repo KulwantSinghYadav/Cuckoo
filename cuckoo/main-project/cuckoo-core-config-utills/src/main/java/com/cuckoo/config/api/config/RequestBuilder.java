@@ -15,7 +15,7 @@ public interface RequestBuilder {
 	String sendApiRequest(String authUrl, Map<String, String> buildRewardHearder,
 			RequestBody body) throws IOException;
 
-	String getAuthorisationToken(String response);
+	Map<String,String> getAuthorisationReqRes(String response, String authUrl, String encodedAuth, String status, String clientCredentials);
 	
 //	Map<String, String> setQueryParameter(ConfigurationProvider configurationProvider);
 	Map<String, String> setQueryParameter(ConfigurationProvider configurationProvider,String rewardLinkCode);

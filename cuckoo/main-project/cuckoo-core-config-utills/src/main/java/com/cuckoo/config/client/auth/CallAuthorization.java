@@ -3,6 +3,7 @@ package com.cuckoo.config.client.auth;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.cuckoo.config.property.config.ConfigurationKeys;
 import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
 import com.cuckoo.dao.impl.AuthorizationDao;
+import com.cuckoo.dao.impl.AuthorizationDaoImpl;
 import com.model.core.constant.ApplicationConstant;
 import com.model.core.model.Authorization;
 
@@ -25,10 +27,10 @@ import okhttp3.RequestBody;
 @Component
 public class CallAuthorization extends BuildRequestApi{
 	
-	@Autowired
-	AuthorizationDao authorizationDao;
+	AuthorizationDao authorizationDao = new AuthorizationDaoImpl();
 	
-    public String callAuthorization() throws IOException {
+	
+    public Map<String,String> callAuthorization() throws IOException {
     	
     	HeaderBuilder headerProvider = new BuildRequestHeader();
 		PropertyConfiguration propertyConfiguration = new PropertyConfiguration(); 
@@ -41,24 +43,24 @@ public class CallAuthorization extends BuildRequestApi{
 		
     	Map<String, String> buildRequestHearder = headerProvider.buildAuthorization(configurationProvider,encodedAuth);
     	
-    	authorizationDao.saveRequestDetail(authUrl,encodedAuth,ApplicationConstant.Pending,ApplicationConstant.Client_Credentials);
 //    	saveRequestDetail(authUrl,encodedAuth,ApplicationConstant.Pending,ApplicationConstant.Client_Credentials);
-    	
-    	
+
     	//call the city Authorization api by passing requied parameters.
     	String response = sendApiRequest(authUrl,buildRequestHearder,body);
-		return getAuthorisationToken(response);
+    	
+    	
+		return getAuthorisationReqRes(response,authUrl,encodedAuth,ApplicationConstant.Pending,ApplicationConstant.Client_Credentials);
 	}
 
-	/*
-	 * private void saveRequestDetail(String authUrl, String encodedAuth, String
-	 * status, String clientCredentials) { Authorization authorization = new
-	 * Authorization(); authorization.setAuthUrl(authUrl);
-	 * authorization.setAuthorizationBase(encodedAuth);
-	 * authorization.setStatus(status);
-	 * authorization.setGrantType(clientCredentials);
-	 * authorizationDao.persist(authorization); }
-	 */
+	
+//	  private void saveRequestDetail(String authUrl, String encodedAuth, String
+//	  status, String clientCredentials) { Authorization authorization = new
+//	  Authorization(); authorization.setAuthUrl(authUrl);
+//	  authorization.setAuthorizationBase(encodedAuth);
+//	  authorization.setStatus(status);
+//	  authorization.setGrantType(clientCredentials);
+//	  authorizationDao.persist(authorization); }
+//	 
 
 	/*
      * This function is used to set response body.
@@ -74,7 +76,10 @@ public class CallAuthorization extends BuildRequestApi{
 		
 		if(recordCount == 0 && recordCount <0) {
 			Authorization Authorization = new Authorization();
-			callAuthorization();
+			 Map<String,String> authReqRes = callAuthorization();
+			 
+			 Authorization.setAccessToken(authReqRes.get(""));
+			 
 		}
 		
 		String authToken = authorizationDao.getAuthorizationToken();

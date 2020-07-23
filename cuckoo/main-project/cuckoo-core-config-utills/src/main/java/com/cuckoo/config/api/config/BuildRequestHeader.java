@@ -4,28 +4,28 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.Base64;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import com.cuckoo.config.client.auth.CallAuthorization;
 import com.cuckoo.config.property.config.ConfigurationKeys;
 import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
-import com.cuckoo.dao.impl.AuthorizationDao;
-import com.cuckoo.dao.impl.AuthorizationDaoImpl;
 
 
 @Component
+@ComponentScan(basePackages = { "com.cuckoo.config.client.auth" })
 public class BuildRequestHeader implements HeaderBuilder {
+	
+	CallAuthorization callAuthorization = new CallAuthorization();
 	
 	// Build request headre for Reward related API'S
 	@Override
-	public Map<String, String> buildRewardHearder() throws IOException {
+	public Map<String, String> buildRewardHearder(String authToken) throws IOException {
 
 		Map<String, String> requestHeaderValue = new HashMap<>();
-		CallAuthorization authToken = new CallAuthorization();
+//		CallAuthorization authToken = new CallAuthorization();
 		PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
 		ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
 
@@ -35,7 +35,7 @@ public class BuildRequestHeader implements HeaderBuilder {
 		requestHeaderValue.put("countrycode", configurationProvider.getValue(ConfigurationKeys.COUNTRY_CODE));
 		requestHeaderValue.put("businesscode", configurationProvider.getValue(ConfigurationKeys.BUSINESS_CODE));
 //		requestHeaderValue.put("authorization", authToken.getAuthToken());
-		requestHeaderValue.put("authorization", authToken.callAuthorization());
+		requestHeaderValue.put("authorization", authToken);
 		requestHeaderValue.put("accept-language", configurationProvider.getValue(ConfigurationKeys.ACCEPT_LANGUAGE));
 		requestHeaderValue.put("accept", configurationProvider.getValue(ConfigurationKeys.ACCEPT));
 

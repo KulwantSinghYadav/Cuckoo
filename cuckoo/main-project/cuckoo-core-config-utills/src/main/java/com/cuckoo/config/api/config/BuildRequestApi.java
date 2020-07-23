@@ -115,12 +115,25 @@ public class BuildRequestApi implements RequestBuilder {
 
 	// This function is used to get Authorization token value.
 	@Override
-	public String getAuthorisationToken(String response) {
+	public Map<String,String> getAuthorisationReqRes(String response, String authUrl, String encodedAuth, String status, String clientCredentials) {
 		JSONObject obj = new JSONObject(response);
 		String access_token = obj.getString("access_token");
 		String token_type = obj.getString("token_type");
+		Integer expires_in = Integer.valueOf(obj.getInt("expires_in"));
+		Integer consentedOn =  Integer.valueOf(obj.getInt("consented_on"));
+		String scope = obj.getString("scope");
 		String authorisation = token_type.concat(" " + access_token);
-		return authorisation;
+		
+		Map<String, String> authorisationReqRes = new HashMap<>();
+		authorisationReqRes.put("authUrl",authUrl);
+		authorisationReqRes.put("encoded_auth",encodedAuth);
+		authorisationReqRes.put("access_token",access_token);
+		authorisationReqRes.put("client_credentials",clientCredentials);
+		authorisationReqRes.put("authorisation",authorisation);
+		authorisationReqRes.put("expires_in",expires_in.toString());
+		authorisationReqRes.put("scope",scope);
+		authorisationReqRes.put("consented_on",consentedOn.toString());
+		return authorisationReqRes;
 	}
 
 	// This function is to set query parameter

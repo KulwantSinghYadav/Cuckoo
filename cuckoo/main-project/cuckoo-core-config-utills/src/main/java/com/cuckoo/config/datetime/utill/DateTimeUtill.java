@@ -1,6 +1,7 @@
 package com.cuckoo.config.datetime.utill;
 
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -17,5 +18,9 @@ public class DateTimeUtill {
 
 	private static ZonedDateTime getCurrentZoneDateTime(String provideZoneID) {
 		return ZonedDateTime.now(ZoneId.of(provideZoneID));
+	}
+
+	public static Timestamp getAuthExpireTime(String expireTime, Timestamp currentTime) {
+		return Timestamp.from(currentTime.toInstant().plus(Duration.ofMinutes(Long.valueOf(expireTime))));
 	}
 }
