@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -17,41 +16,44 @@ import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
 import com.model.core.constant.ApplicationConstant;
 
-import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
-
 @Component
 public class CallCitiRewardBalance {
 
 	/*
-	 * This function is used to get the city reward balance with the dynamic request.
-	 * The dynamic request is made from by getting the request arguments from the external user end.
+	 * This function is used to get the city reward balance with the dynamic
+	 * request. The dynamic request is made from by getting the request arguments
+	 * from the external user end.
 	 */
 	public String callCityReward(String apiProduct, String endpoint, String authToken, String contentType,
 			String countryCode, String businessCode, String acceptLanguage, String accept,
-			String cloakedCreditCardNumbers, String merchantCode, String rewardProgram) throws IOException {
+			String cloakedCreditCardNumbers, String merchantCode, String rewardProgram,String rewardLinkCode) throws IOException {
 
 		String response = null;
 		try {
 
 			HeaderBuilder headerProvider = new BuildRequestHeader();
 			RequestBuilder requestBuilder = new BuildRequestApi();
-			CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
+//			CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
 			PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
 			ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
 			String requestMethod = "get";
 			String requestBody = "";
-			
-			/*
-			 * "callCityRewardLinkage" function will the  City  Reward Linkage response from the class CallCitiRewardLinkage.
-			 */
-			String rewardLinkCodeResponse = callCitiRewardLinkage.callCityRewardLinkage(authToken, contentType,
-					countryCode, businessCode, acceptLanguage, accept);
-			
-			/*
-			 * "getRewardLinkCode" function get the response form the mapped response of Reward Linkage Api.
-			 */
-			String rewardLinkCode = getRewardLinkCode(rewardLinkCodeResponse);
 
+			/*
+			 * "callCityRewardLinkage" function will the City Reward Linkage response from
+			 * the class CallCitiRewardLinkage.
+			 * 
+			 * String rewardLinkCodeResponse =
+			 * callCitiRewardLinkage.callCityRewardLinkage(authToken, contentType,
+			 * countryCode, businessCode, acceptLanguage, accept);
+			 * 
+			 * 
+			 * "getRewardLinkCode" function get the response form the mapped response of
+			 * Reward Linkage Api.
+			 * 
+			 * String rewardLinkCode = getRewardLinkCode(rewardLinkCodeResponse);
+			 */
+			
 			/*
 			 * "setUrlPattern" function is used to build the dynamic URL request.
 			 */
@@ -63,7 +65,7 @@ public class CallCitiRewardBalance {
 			queryParameter.put(ApplicationConstant.Merchant_Code, merchantCode);
 			queryParameter.put(ApplicationConstant.Reward_Program, rewardProgram);
 			queryParameter.put(ApplicationConstant.Reward_Link_Code, rewardLinkCode);
-			
+
 			/*
 			 * "buildRewardHearder" function is used to build the dynamic Header.
 			 */
@@ -89,8 +91,9 @@ public class CallCitiRewardBalance {
 
 	}
 
-	private String getRewardLinkCode(String rewardLinkCodeResponse) {
-		JSONObject obj = new JSONObject(rewardLinkCodeResponse);
-		return obj.getString("rewardLinkCode");
-	}
+	/*
+	 * private String getRewardLinkCode(String rewardLinkCodeResponse) { JSONObject
+	 * obj = new JSONObject(rewardLinkCodeResponse); return
+	 * obj.getString("rewardLinkCode"); }
+	 */
 }

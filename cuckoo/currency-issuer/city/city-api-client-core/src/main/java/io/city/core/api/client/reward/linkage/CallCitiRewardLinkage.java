@@ -18,13 +18,14 @@ import okhttp3.RequestBody;
 
 @Component
 public class CallCitiRewardLinkage extends BuildRequestApi {
-	
+
 	/*
-	 * This function is used to get the city reward linkage with the dynamic request.
-	 * The dynamic request is made from by getting the request arguments from the external user end.
+	 * This function is used to get the city reward linkage with the dynamic
+	 * request. The dynamic request is made from by getting the request arguments
+	 * from the external user end.
 	 */
-	public String callCityRewardLinkage(String authToken, String contentType, String countryCode, String businessCode,
-			String acceptLanguage, String accept) throws IOException {
+	public String callCityRewardLinkage(String apiProduct, String endpoint, String accessToken, String contentType,
+			String countryCode, String businessCode, String acceptLanguage, String accept, String rewardLinkageBody) throws IOException {
 
 		String response = null;
 		try {
@@ -32,21 +33,17 @@ public class CallCitiRewardLinkage extends BuildRequestApi {
 			PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
 			ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
 
-			RequestBody requestBody = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE,
-					ApplicationConstant.Get_Citi_Reward_Linkage_Body);
-
+			RequestBody requestBody = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE,rewardLinkageBody);
 			/*
 			 * "setUrlPattern" function is used to build the dynamic URL request.
 			 */
 			String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
-					configurationProvider.getValue(ConfigurationKeys.VI),
-					configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
-					configurationProvider.getValue(ConfigurationKeys.LINKAGEEND_POINT));
-			
+					configurationProvider.getValue(ConfigurationKeys.VI),apiProduct,endpoint);
+
 			/*
 			 * "buildRewardHearder" function is used to build the dynamic Header.
 			 */
-			Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken, contentType,
+			Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(accessToken, contentType,
 					countryCode, businessCode, acceptLanguage, accept);
 
 			// call the city reward linkage api by passing requied parameters.
@@ -56,7 +53,7 @@ public class CallCitiRewardLinkage extends BuildRequestApi {
 		} catch (Exception e) {
 			System.out.println("Someting went wrong in reward linkage API" + e);
 		}
-		
+
 		if (!StringUtils.isEmpty(response)) {
 			return response;
 		} else {

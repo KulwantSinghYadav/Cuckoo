@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.model.core.model.api.RewardBalance;
@@ -52,9 +53,10 @@ public class RewardBalanceController {
 			@RequestHeader(value = "businesscode") String businessCode,
 			@RequestHeader(value = "accept-language") String acceptLanguage,
 			@RequestHeader(value = "accept") String accept,
-			@RequestHeader(value = "cloakedCreditCardNumbers") String cloakedCreditCardNumbers,
-			@RequestHeader(value = "merchantCode") String merchantCode,
-			@RequestHeader(value = "rewardProgram") String rewardProgram) throws IOException {
+			@RequestParam("cloakedCreditCardNumbers") String cloakedCreditCardNumbers,
+			@RequestParam("merchantCode") String merchantCode,
+			@RequestParam("rewardLinkCode") String rewardLinkCode,
+			@RequestParam("rewardProgram") String rewardProgram) throws IOException {
 
 		RewardBalance CitiRewardBalanceRequestResponse = new RewardBalance();
 		/*
@@ -64,7 +66,7 @@ public class RewardBalanceController {
 		String accessToken = authorizationService.getAuthorizationToken();
 		String response = callCitiRewardBalance.callCityReward(apiProduct, endpoint, accessToken, contentType,
 				countryCode, businessCode, acceptLanguage, accept, cloakedCreditCardNumbers, merchantCode,
-				rewardProgram);
+				rewardProgram,rewardLinkCode);
 
 		CitiRewardBalanceRequestResponse.setApiName("rewardBalance");
 		CitiRewardBalanceRequestResponse.setCreationTime(new Timestamp(System.currentTimeMillis()));

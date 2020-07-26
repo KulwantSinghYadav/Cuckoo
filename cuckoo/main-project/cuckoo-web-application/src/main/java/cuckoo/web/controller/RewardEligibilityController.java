@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.model.core.model.api.RewardEligibility;
@@ -51,8 +52,8 @@ public class RewardEligibilityController {
 			@RequestHeader(value = "countrycode") String countryCode,
 			@RequestHeader(value = "businesscode") String businessCode,
 			@RequestHeader(value = "accept-language") String acceptLanguage,
-			@RequestHeader(value = "accept") String accept, @RequestHeader(value = "merchantCode") String merchantCode,
-			@RequestHeader(value = "rewardProgram") String rewardProgram) throws IOException {
+			@RequestHeader(value = "accept") String accept, @RequestParam("merchantCode") String merchantCode,
+			@RequestParam("rewardProgram") String rewardProgram) throws IOException {
 
 		RewardEligibility CitiRewardEligibilityRequestResponse = new RewardEligibility();
 		/*
