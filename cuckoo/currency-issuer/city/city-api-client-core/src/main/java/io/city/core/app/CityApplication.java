@@ -33,30 +33,30 @@ public class CityApplication implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 
 		System.out.println();
-		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
-		String authToken = "";
-		callCitiRewardLinkage.callCityRewardLinkage(authToken);
+//		CallCitiRewardLinkage callCitiRewardLinkage = new CallCitiRewardLinkage();
+//		String authToken = "";
+//		callCitiRewardLinkage.callCityRewardLinkage(authToken);
 
-		System.out.println();
-		CallCitiRewardBalance callCitiRewardBalance = new CallCitiRewardBalance();
-		callCitiRewardBalance.callCityReward(authToken);
-
-		System.out.println();
-		CallCitiRewardEligibility callCitiRewardEligibility = new CallCitiRewardEligibility();
-		callCitiRewardEligibility.callCityRewardEligibility(authToken);
-
-		System.out.println();
-		CallCitiRewardEnablement callCitiRewardEnablement = new CallCitiRewardEnablement();
-		callCitiRewardEnablement.callCityRewardEnablement(authToken);
-
-		/*
-		 * System.out.println(); CallAuthorization authorizationToken = new
-		 * CallAuthorization(); authorizationToken.callAuthorization();
-		 */
-
-		System.out.println();
-		CallCitiRewardRedemption callCitiRewardRedemption = new CallCitiRewardRedemption();
-		callCitiRewardRedemption.callCityRewardRedemption(authToken);
-
+//		System.out.println();
+//		CallCitiRewardBalance callCitiRewardBalance = new CallCitiRewardBalance();
+//		callCitiRewardBalance.callCityReward(authToken);
+//
+//		System.out.println();
+//		CallCitiRewardEligibility callCitiRewardEligibility = new CallCitiRewardEligibility();
+//		callCitiRewardEligibility.callCityRewardEligibility(authToken);
+//
+//		System.out.println();
+//		CallCitiRewardEnablement callCitiRewardEnablement = new CallCitiRewardEnablement();
+//		callCitiRewardEnablement.callCityRewardEnablement(authToken);
+//
+//		/*
+//		 * System.out.println(); CallAuthorization authorizationToken = new
+//		 * CallAuthorization(); authorizationToken.callAuthorization();
+//		 */
+//
+//		System.out.println();
+//		CallCitiRewardRedemption callCitiRewardRedemption = new CallCitiRewardRedemption();
+//		callCitiRewardRedemption.callCityRewardRedemption(authToken);
+//
 	}
 }

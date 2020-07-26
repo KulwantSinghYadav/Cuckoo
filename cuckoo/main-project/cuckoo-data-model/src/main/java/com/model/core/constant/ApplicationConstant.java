@@ -2,6 +2,9 @@ package com.model.core.constant;
 
 import okhttp3.MediaType;
 
+/*
+ * This class is used to make constant for the entire application.
+ */
 public class ApplicationConstant {
 	
 	public static final String payWithRewardsSample = "{\r\n" + 
@@ -45,7 +48,21 @@ public class ApplicationConstant {
 			"}";
 
 	public static final String Pending = "Pending";
-
+			
 	public static final String Client_Credentials = "client_credentials";
+	public static final String Cloaked_Credit_Card_Numbers = "cloakedCreditCardNumbers";
+	public static final String Merchant_Code = "merchantCode";
+	public static final String Reward_Program = "rewardProgram";
+	public static final String Reward_Link_Code = "rewardLinkCode";
+	public static final String Client_Id = "client_id";
+	public static final String UUID = "uuid";
+	public static final String Content_Type = "content-type";
+	public static final String Country_Code = "countrycode";
+	public static final String Business_Code = "businesscode";
+	public static final String Authorization = "authorization";
+	public static final String Accept_Language = "accept-language";
+	public static final String Accept = "accept";
+	public static final String Api_Product = "apiProduct";
+	public static final String End_Point = "endpoint";
 
 }

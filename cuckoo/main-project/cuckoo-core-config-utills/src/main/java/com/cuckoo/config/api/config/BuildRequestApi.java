@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.cuckoo.config.property.config.CitiRewardBalanceConfiguration;
-import com.cuckoo.config.property.config.ConfigurationKeys;
-import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.model.core.constant.ApplicationConstant;
 
 import okhttp3.HttpUrl;
@@ -23,8 +21,9 @@ import okhttp3.Response;
 @Component
 public class BuildRequestApi implements RequestBuilder {
 
-	// This function is used for sending the request to the External-API's with Get
-	// and Put method.
+	/*
+	 * This function is used for sending the request to the External-API's with Get and Put method.
+	 */
 	@Override
 	public String sendApiRequest(String url, Map<String, String> buildRewardHearder,
 			Map<String, String> queryParameters, String method, String body) throws IOException {
@@ -56,12 +55,13 @@ public class BuildRequestApi implements RequestBuilder {
 			Response response = client.newCall(request).execute();
 			return response.body().string();
 		} else {
-			return "someting went wrong";
+			return "someting went wrong during sending of Api request";
 		}
 	}
 
-	// This function is used for sending the request to the External-API's with Post
-	// method.
+	/*
+	 * This function is used for sending the request to the External-API's with Post method.
+	 */
 	@Override
 	public String sendApiRequest(String authUrl, Map<String, String> buildRewardHearder, RequestBody body)
 			throws IOException {
@@ -82,7 +82,7 @@ public class BuildRequestApi implements RequestBuilder {
 			Response response = client.newCall(request).execute();
 			return response.body().string();
 		} else {
-			return "someting went wrong";
+			return "someting went wrong during sending of Api request";
 		}
 	}
 
@@ -113,7 +113,9 @@ public class BuildRequestApi implements RequestBuilder {
 //	    }
 //	}
 
-	// This function is used to get Authorization token value.
+	/*
+	 *  This function is used to get Authorization token value and set the response into a map.
+	 */
 	@Override
 	public Map<String,String> getAuthorisationReqRes(String response, String authUrl, String encodedAuth, String status, String clientCredentials) {
 		JSONObject obj = new JSONObject(response);
@@ -136,45 +138,44 @@ public class BuildRequestApi implements RequestBuilder {
 		return authorisationReqRes;
 	}
 
-	// This function is to set query parameter
+	/*
+	 *  This function is to set dynamic query parameter
+	 */
 	@Override
-	public Map<String, String> setQueryParameter(ConfigurationProvider configurationProvider,String rewardLinkCode) {
+	public Map<String, String> setQueryParameter(Map<String,String> queryParameter) {
 
 		// Set the query parameter for city reward api.
 		Map<String, String> queryParameters = new LinkedHashMap<>();
 
-		if (validateString(configurationProvider.getValue(ConfigurationKeys.CLOAKED_CREDIT_CARD_NUMBERS))) {
+		if (validateString(queryParameter.get(ApplicationConstant.Cloaked_Credit_Card_Numbers))) {
 			
-			queryParameters.put("cloakedCreditCardNumber", configurationProvider.getValue(ConfigurationKeys.CLOAKED_CREDIT_CARD_NUMBERS));
+			queryParameters.put(ApplicationConstant.Cloaked_Credit_Card_Numbers, queryParameter.get(ApplicationConstant.Cloaked_Credit_Card_Numbers));
 		}
-		if (validateString(configurationProvider.getValue(ConfigurationKeys.MERCHANT_CODE))) {
+		if (validateString(queryParameter.get(ApplicationConstant.Merchant_Code))) {
 
-			queryParameters.put("merchantCode", configurationProvider.getValue(ConfigurationKeys.MERCHANT_CODE));
+			queryParameters.put(ApplicationConstant.Merchant_Code, queryParameter.get(ApplicationConstant.Merchant_Code));
 		}
-		if (validateString(configurationProvider.getValue(ConfigurationKeys.REWARD_PROGRAM))) {
+		if (validateString(queryParameter.get(ApplicationConstant.Reward_Program))) {
 
-			queryParameters.put("rewardProgram", configurationProvider.getValue(ConfigurationKeys.REWARD_PROGRAM));
+			queryParameters.put(ApplicationConstant.Reward_Program, queryParameter.get(ApplicationConstant.Reward_Program));
 		}
-		if (validateString(rewardLinkCode)) {
+		if (validateString(queryParameter.get(ApplicationConstant.Reward_Link_Code))) {
 
-			queryParameters.put("rewardLinkCode", rewardLinkCode);
+			queryParameters.put(ApplicationConstant.Reward_Link_Code, queryParameter.get(ApplicationConstant.Reward_Link_Code));
 		}
 
 		return queryParameters;
 	}
 
+	/*
+	 *  This function is to validate query parameter
+	 */
 	private boolean validateString(String value) {
-		if (value.equals("") && StringUtils.isEmpty(value)) {
+		if (StringUtils.isEmpty(value)) {
 			return false;
 		} else {
 			return true;
 		}
 
 	}
-
-//	@Override
-//	public Map<String, String> setQueryParameter(ConfigurationProvider configurationProvider, String rewardLinkCode) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

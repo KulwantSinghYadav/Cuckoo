@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.cuckoo.config.api.config.BuildRequestApi;
 import com.cuckoo.config.api.config.BuildRequestHeader;
@@ -16,30 +17,51 @@ import com.model.core.constant.ApplicationConstant;
 
 @Component
 public class CallCitiRewardEnablement extends BuildRequestApi {
+	
+	/*
+	 * This function is used to get the city reward enablement with the dynamic request.
+	 * The dynamic request is made from by getting the request arguments from the external user end.
+	 */
+	public String callCityRewardEnablement(String apiProduct, String endpoint, String authToken, String contentType,
+			String countryCode, String businessCode, String acceptLanguage, String accept, String rewardEnablementBody)
+			throws IOException {
 
-	public String callCityRewardEnablement(String authToken) throws IOException {
+		String response = null;
+		try {
+			HeaderBuilder headerProvider = new BuildRequestHeader();
+			PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
+			ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
+			String requestMethod = "put";
+			String requestBody = ApplicationConstant.Get_Citi_Reward_Enablement_Body;
 
-		HeaderBuilder headerProvider = new BuildRequestHeader();
-		PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
-		ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
-		String requestMethod = "put";
-		String requestBody = ApplicationConstant.Get_Citi_Reward_Enablement_Body;
+			/*
+			 * "setUrlPattern" function is used to build the dynamic URL request.
+			 */
+			String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
+					configurationProvider.getValue(ConfigurationKeys.VI), apiProduct, endpoint);
+			
+			/*
+			 * "buildRewardHearder" function is used to build the dynamic Header.
+			 */
+			Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken, contentType,
+					countryCode, businessCode, acceptLanguage, accept);
+			Map<String, String> queryParameters = new HashMap<String, String>();
 
+			// call the city reward enablement api by passing requied parameters.
+			response = sendApiRequest(url, buildRequestHearder, queryParameters, requestMethod, rewardEnablementBody);
 
-		String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
-				configurationProvider.getValue(ConfigurationKeys.VI),
-				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
-				configurationProvider.getValue(ConfigurationKeys.ENABLEMENT_END_POINT));
-		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken);
-		Map<String, String> queryParameters = new HashMap<String, String>();
-		
+			System.out.println("Client Reward Enablement :" + response);
 
-		// call the city reward enablement api by passing requied parameters.
-		String response = sendApiRequest(url, buildRequestHearder, queryParameters, requestMethod, requestBody);
+			return response;
+		} catch (Exception e) {
+			System.out.println("Someting went wrong in reward enablement API" + e);
+		}
 
-		System.out.println("Client Reward Enablement :" + response);
-
-		return response;
+		if (!StringUtils.isEmpty(response)) {
+			return response;
+		} else {
+			return "Someting went wrong in reward enablement API";
+		}
 
 	}
 }

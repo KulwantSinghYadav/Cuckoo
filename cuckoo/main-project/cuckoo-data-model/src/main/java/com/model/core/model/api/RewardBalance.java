@@ -1,4 +1,4 @@
-package com.model.core.model.city;
+package com.model.core.model.api;
 
 import java.sql.Timestamp;
 
@@ -10,16 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /*
- * This is our model class and it corresponds to CitiRewardBalanceRequest table in database
+ * This is our model class and it corresponds to RewardBalance table in database
  */
 @Entity
-@Table(name = "Citi_reward_balance_request_response")
-public class CitiRewardBalanceRequestResponse {
+@Table(name = "reward_balance")
+public class RewardBalance {
 
 	@Id
-	@Column(name = "id", nullable = false, insertable = true, updatable = true, columnDefinition = "int default 0")
+	@Column(name = "trans_id", nullable = false, insertable = true, updatable = true, columnDefinition = "int default 0")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	int transId;
 
 	@Column(name = "request_url", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String requestUrl;
@@ -33,13 +33,13 @@ public class CitiRewardBalanceRequestResponse {
 	@Column(name = "creation_time", nullable = false, insertable = true, updatable = true, columnDefinition = "timestamp default now()")
 	Timestamp creationTime;
 
-	public CitiRewardBalanceRequestResponse() {
+	public RewardBalance() {
 		super();
 	}
 
-	public CitiRewardBalanceRequestResponse(int id, String requestUrl, String apiName, String responseData, Timestamp creationTime) {
+	public RewardBalance(int id, String requestUrl, String apiName, String responseData, Timestamp creationTime) {
 		super();
-		this.id = id;
+		this.transId = id;
 		this.requestUrl = requestUrl;
 		this.responseData = responseData;
 		this.creationTime = creationTime;
@@ -47,11 +47,11 @@ public class CitiRewardBalanceRequestResponse {
 	}
 
 	public int getId() {
-		return id;
+		return transId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.transId = id;
 	}
 
 	public String getRequestUrl() {

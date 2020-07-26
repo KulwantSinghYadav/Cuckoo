@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.cuckoo.config.api.config.BuildRequestApi;
 import com.cuckoo.config.api.config.BuildRequestHeader;
@@ -18,27 +19,49 @@ import okhttp3.RequestBody;
 @Component
 public class CallCitiRewardRedemption extends BuildRequestApi {
 
-	public String callCityRewardRedemption(String authToken) throws IOException {
+	/*
+	 * This function is used to get the city reward redemption with the dynamic request.
+	 * The dynamic request is made from by getting the request arguments from the external user end.
+	 */
+	public String callCityRewardRedemption(String apiProduct, String endpoint, String authToken, String contentType,
+			String countryCode, String businessCode, String acceptLanguage, String accept, String redemptionRequestBody)
+			throws IOException {
 
-		HeaderBuilder headerProvider = new BuildRequestHeader();
-		PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
-		ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
+		String response = null;
 
-		RequestBody body = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE,
-				ApplicationConstant.Get_Citi_Reward_Redemption_Body);
+		try {
+			HeaderBuilder headerProvider = new BuildRequestHeader();
+			PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
+			ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
 
-		String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
-				configurationProvider.getValue(ConfigurationKeys.VI),
-				configurationProvider.getValue(ConfigurationKeys.API_PRODUCT),
-				configurationProvider.getValue(ConfigurationKeys.REDEMPTION_END_POINT));
-		Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken);
-		
-		// call the city reward redemption api by passing requied parameters.
-		String response = sendApiRequest(url, buildRequestHearder, body);
+			RequestBody redemptionBody = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE, redemptionRequestBody);
 
-		System.out.println("Client Reward Redemption :" + response);
+			/*
+			 * "setUrlPattern" function is used to build the dynamic URL request.
+			 */
+			String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
+					configurationProvider.getValue(ConfigurationKeys.VI), apiProduct, endpoint);
+			
+			/*
+			 * "buildRewardHearder" function is used to build the dynamic Header.
+			 */
+			Map<String, String> buildRequestHearder = headerProvider.buildRewardHearder(authToken, contentType,
+					countryCode, businessCode, acceptLanguage, accept);
 
-		return response;
+			// call the city reward redemption api by passing requied parameters.
+			response = sendApiRequest(url, buildRequestHearder, redemptionBody);
+
+			System.out.println("Client Reward Redemption :" + response);
+
+		} catch (Exception e) {
+			System.out.println("Someting went wrong  in reward redemption API" + e);
+		}
+
+		if (!StringUtils.isEmpty(response)) {
+			return response;
+		} else {
+			return "Someting went wrong in reward redemption API";
+		}
 
 	}
 

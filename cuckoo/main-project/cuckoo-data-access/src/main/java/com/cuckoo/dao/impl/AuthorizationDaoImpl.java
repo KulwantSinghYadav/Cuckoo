@@ -16,24 +16,6 @@ public class AuthorizationDaoImpl  extends DaoImpl<Integer , Authorization>  imp
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Override
-	public void saveRequestDetail(String authUrl, String encodedAuth, String status, String clientCredentials) {
-//		Authorization authorization = new Authorization();
-//    	authorization.setAuthUrl(authUrl);
-//    	authorization.setAuthorizationBase(encodedAuth);
-//    	authorization.setStatus(status);
-//    	authorization.setGrantType(clientCredentials);
-//    	
-//    	persist(authorization);
-//    	
-//    	System.out.println("In AuthorizationDaoImpl");
-	}
-
-	@Override
-	public String getAuthorizationToken() {
-		
-		return "";
-	}
 
 	@Override
 	public Authorization getTopRecord() {

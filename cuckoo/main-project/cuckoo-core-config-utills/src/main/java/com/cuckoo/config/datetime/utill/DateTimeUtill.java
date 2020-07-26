@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+/*
+ * This class is used to make the data time related operations. 
+ */
 public class DateTimeUtill {
 	
 	public static Timestamp getCurrentSqlTimeStamp(String provideZoneID) {
@@ -20,7 +23,7 @@ public class DateTimeUtill {
 		return ZonedDateTime.now(ZoneId.of(provideZoneID));
 	}
 
-	public static Timestamp getAuthExpireTime(String expireTime, Timestamp currentTime) {
+	public static Timestamp getAuthExpireTime(String provideZoneID, String expireTime, Timestamp currentTime) {
 		return Timestamp.from(currentTime.toInstant().plus(Duration.ofMinutes(Long.valueOf(expireTime))));
 	}
 }

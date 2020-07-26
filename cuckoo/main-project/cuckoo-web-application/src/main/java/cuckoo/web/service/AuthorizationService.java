@@ -21,14 +21,16 @@ public class AuthorizationService {
 	AuthorizationDao authorizationDao;
 
 	CallAuthorization callAuthorization = new CallAuthorization();
-
+	
+	/*
+	 * This function is used to save the authorization request into the database if the token gets expired,
+	 * otherwise it will fetch the latest authorization token from the database. 
+	 */
 	@Transactional
 	public String getAuthorizationToken() {
 		String authToken = null;
 
 		try {
-			
-			
 			Integer recordCount = authorizationDao.countAll();
 			Authorization extstinRecord = authorizationDao.getTopRecord();
 			Timestamp currentTime = DateTimeUtill.getCurrentSqlTimeStamp("CET");
@@ -36,7 +38,7 @@ public class AuthorizationService {
 			if (recordCount == 0 || currentTime.compareTo(extstinRecord.getExpiresTime())==1) {
 				
 				Map<String, String> authReqRes = callAuthorization.callAuthorization();
-				Timestamp expiresTime = DateTimeUtill.getAuthExpireTime(authReqRes.get("expires_in"),currentTime);
+				Timestamp expiresTime = DateTimeUtill.getAuthExpireTime("CET",authReqRes.get("expires_in"),currentTime);
 				
 				Authorization authorization = new Authorization();
 				
@@ -67,7 +69,7 @@ public class AuthorizationService {
 		if (!StringUtil.isBlank(authToken)) {
 			return authToken;
 		} else {
-			return "something went wrong";
+			return "something went wrong to get the authorization token";
 		}
 	}
 

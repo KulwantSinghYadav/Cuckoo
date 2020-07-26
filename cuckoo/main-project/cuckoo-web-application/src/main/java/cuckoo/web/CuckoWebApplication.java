@@ -12,6 +12,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+/*
+ * This class is used to build the web-application. 
+ */
+
 @SpringBootApplication
 @EnableWebMvc
 @ComponentScan(basePackages = { "cuckoo.web", "cuckoo.web.controller", "com.cuckoo.dao.impl", "com.cuckoo.config" })

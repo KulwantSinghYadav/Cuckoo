@@ -18,6 +18,6 @@ public interface RequestBuilder {
 	Map<String,String> getAuthorisationReqRes(String response, String authUrl, String encodedAuth, String status, String clientCredentials);
 	
 //	Map<String, String> setQueryParameter(ConfigurationProvider configurationProvider);
-	Map<String, String> setQueryParameter(ConfigurationProvider configurationProvider,String rewardLinkCode);
+	Map<String, String> setQueryParameter(Map<String,String> queryParameter);
 	
 }

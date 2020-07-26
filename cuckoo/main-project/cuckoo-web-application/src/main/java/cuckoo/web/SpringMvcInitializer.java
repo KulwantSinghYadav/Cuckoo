@@ -6,6 +6,9 @@ import javax.servlet.ServletException;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/*
+ * This class is used to dispatch our application on server. 
+ */
 
 public class SpringMvcInitializer  extends AbstractAnnotationConfigDispatcherServletInitializer {
 	

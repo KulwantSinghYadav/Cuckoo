@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+/*
+ * This class is used to configure the database configurations. 
+ */
+
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfiguration {
