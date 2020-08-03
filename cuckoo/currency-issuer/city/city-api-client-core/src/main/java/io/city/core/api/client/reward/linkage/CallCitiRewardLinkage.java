@@ -6,12 +6,14 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.cuckoo.config.api.ReqRes.model.RewardLinkageRequestBody;
 import com.cuckoo.config.api.config.BuildRequestApi;
 import com.cuckoo.config.api.config.BuildRequestHeader;
 import com.cuckoo.config.api.config.HeaderBuilder;
 import com.cuckoo.config.property.config.ConfigurationKeys;
 import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
+import com.google.gson.Gson;
 import com.model.core.constant.ApplicationConstant;
 
 import okhttp3.RequestBody;
@@ -25,20 +27,28 @@ public class CallCitiRewardLinkage extends BuildRequestApi {
 	 * from the external user end.
 	 */
 	public String callCityRewardLinkage(String apiProduct, String endpoint, String accessToken, String contentType,
-			String countryCode, String businessCode, String acceptLanguage, String accept, String rewardLinkageBody) throws IOException {
+			String countryCode, String businessCode, String acceptLanguage, String accept,
+			String cloakedCreditCardNumbers, String merchantCode, String rewardProgram, String billingZipCode) throws IOException {
 
 		String response = null;
 		try {
 			HeaderBuilder headerProvider = new BuildRequestHeader();
 			PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
 			ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
+			
 
-			RequestBody requestBody = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE,rewardLinkageBody);
+			RewardLinkageRequestBody rewardLinkage = new RewardLinkageRequestBody(rewardProgram,merchantCode,cloakedCreditCardNumbers,billingZipCode);
+			
+			Gson gson = new Gson();
+			String rewardLinkageBody = gson.toJson(rewardLinkage);
+
+//			RequestBody requestBody = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE, ApplicationConstant.Get_Citi_Reward_Linkage_Body);
+			RequestBody requestBody = RequestBody.create(ApplicationConstant.JSON_MEDIA_TYPE, rewardLinkageBody);
 			/*
 			 * "setUrlPattern" function is used to build the dynamic URL request.
 			 */
 			String url = headerProvider.setUrlPattern(configurationProvider.getValue(ConfigurationKeys.CITY_REWARD_URL),
-					configurationProvider.getValue(ConfigurationKeys.VI),apiProduct,endpoint);
+					configurationProvider.getValue(ConfigurationKeys.VI), apiProduct, configurationProvider.getValue(ConfigurationKeys.LINKAGEEND_POINT));
 
 			/*
 			 * "buildRewardHearder" function is used to build the dynamic Header.

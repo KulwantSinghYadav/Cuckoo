@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cuckoo.dao.impl.api.RewardBalanceDao;
 import com.model.core.model.api.RewardBalance;
+import com.model.core.model.api.RewardLinkage;
 
 
 /*
@@ -27,7 +28,7 @@ public class RewardBalanceService {
 	}
 
 	@Transactional
-	public RewardBalance getCitiRewardBalance(int id) {
+	public RewardBalance getCitiRewardBalance(Integer id) {
 		return rewardBalanceDao.findById(id);
 	}
 
@@ -39,6 +40,11 @@ public class RewardBalanceService {
 	@Transactional
 	public void deleteCitiRewardBalance(int id) {
 		rewardBalanceDao.remove(getCitiRewardBalance(id));
+	}
+	
+	@Transactional
+	public void updateCitiRewardBalance(RewardBalance rewardBalance) {
+		rewardBalanceDao.merge(rewardBalance);
 	}
 
 }

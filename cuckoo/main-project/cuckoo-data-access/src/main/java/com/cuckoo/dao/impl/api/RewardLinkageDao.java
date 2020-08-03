@@ -5,4 +5,7 @@ import com.model.core.model.api.RewardLinkage;
 
 public interface RewardLinkageDao  extends Dao<Integer , RewardLinkage>{
 
+	String getRewardLinkage(String cloakedCreditCardNumbers);
+	void deleteRLByCCCN(String cloakedCreditCardNumbers);
+
 }

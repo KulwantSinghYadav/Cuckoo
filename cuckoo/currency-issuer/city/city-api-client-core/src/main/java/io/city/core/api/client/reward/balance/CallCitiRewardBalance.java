@@ -16,6 +16,8 @@ import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
 import com.model.core.constant.ApplicationConstant;
 
+import io.city.core.api.client.reward.linkage.CallCitiRewardLinkage;
+
 @Component
 public class CallCitiRewardBalance {
 

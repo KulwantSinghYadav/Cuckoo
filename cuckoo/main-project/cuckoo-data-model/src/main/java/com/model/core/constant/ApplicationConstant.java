@@ -48,6 +48,10 @@ public class ApplicationConstant {
 			"}";
 
 	public static final String Pending = "Pending";
+	public static final String Completed = "Completed";
+	public static final String Error = "Error";
+	
+	public static final String City = "City";
 			
 	public static final String Client_Credentials = "client_credentials";
 	public static final String Cloaked_Credit_Card_Numbers = "cloakedCreditCardNumbers";

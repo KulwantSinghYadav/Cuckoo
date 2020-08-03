@@ -15,75 +15,131 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "reward_linkage")
 public class RewardLinkage {
-
+	
 	@Id
 	@Column(name = "trans_id", nullable = false, insertable = true, updatable = true, columnDefinition = "int default 0")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int transId;
-
-	@Column(name = "request_url", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
-	String requestUrl;
+	Integer transId;
 	
-	@Column(name = "api_name", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
-	String apiName;
+	@Column(name = "merchant_code", insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String merchantCode;
+	
+	@Column(name = "cloaked_credit_cardNumber", insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String cloakedCreditCardNumber;
+	
+	@Column(name = "reward_link_code", insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String rewardLinkCode;
+	
+	@Column(name = "reward_program", insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String rewardProgram;
 
-	@Column(name = "response_data", nullable = false, insertable = true, updatable = true, columnDefinition = "varchar default ''")
-	String responseData;
+	@Column(name = "billing_zip_code", insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String billingZipCode;
+	
+	@Column(name = "bank_name", insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String bankName;
+	
+	@Column(name = "status", insertable = true, updatable = true, columnDefinition = "varchar default ''")
+	String status;
 
-	@Column(name = "creation_time", nullable = false, insertable = true, updatable = true, columnDefinition = "timestamp default now()")
+	@Column(name = "creation_time", insertable = true, updatable = true, columnDefinition = "timestamp default now()")
 	Timestamp creationTime;
 
 	public RewardLinkage() {
 		super();
 	}
 
-	public RewardLinkage(int id, String requestUrl, String apiName, String responseData, Timestamp creationTime) {
+	public RewardLinkage(Integer transId, String merchantCode, String cloakedCreditCardNumber, String rewardLinkCode,
+			String billingZipCode, String bankName, String status, Timestamp creationTime) {
 		super();
-		this.transId = id;
-		this.requestUrl = requestUrl;
-		this.responseData = responseData;
+		this.transId = transId;
+		this.merchantCode = merchantCode;
+		this.cloakedCreditCardNumber = cloakedCreditCardNumber;
+		this.rewardLinkCode = rewardLinkCode;
+		this.billingZipCode = billingZipCode;
+		this.bankName = bankName;
+		this.status = status;
 		this.creationTime = creationTime;
-		this.apiName = apiName;
 	}
 
-	public int getId() {
+	public RewardLinkage(String cloakedCreditCardNumbers, String merchantCode2, String rewardProgram,
+			String billingZipCode2) {
+		this.cloakedCreditCardNumber = cloakedCreditCardNumbers;
+		this.merchantCode = merchantCode2;
+		this.rewardProgram = rewardProgram;
+		this.billingZipCode = billingZipCode2;
+	}
+
+	public Integer getTransId() {
 		return transId;
 	}
 
-	public void setId(int id) {
-		this.transId = id;
+	public void setTransId(Integer transId) {
+		this.transId = transId;
 	}
 
-	public String getRequestUrl() {
-		return requestUrl;
+	public String getMerchantCode() {
+		return merchantCode;
 	}
 
-	public void setRequestUrl(String requestUrl) {
-		this.requestUrl = requestUrl;
+	public void setMerchantCode(String merchantCode) {
+		this.merchantCode = merchantCode;
 	}
 
-	public String getResponseData() {
-		return responseData;
+	public String getCloakedCreditCardNumber() {
+		return cloakedCreditCardNumber;
 	}
 
-	public void setResponseData(String responseData) {
-		this.responseData = responseData;
+	public void setCloakedCreditCardNumber(String cloakedCreditCardNumber) {
+		this.cloakedCreditCardNumber = cloakedCreditCardNumber;
+	}
+
+	public String getRewardLinkCode() {
+		return rewardLinkCode;
+	}
+
+	public void setRewardLinkCode(String rewardLinkCode) {
+		this.rewardLinkCode = rewardLinkCode;
+	}
+
+	public String getBillingZipCode() {
+		return billingZipCode;
+	}
+
+	public void setBillingZipCode(String billingZipCode) {
+		this.billingZipCode = billingZipCode;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Timestamp getCreationTime() {
 		return creationTime;
 	}
 
-	public void setCreationTime(Timestamp timestamp) {
-		this.creationTime = timestamp;
+	public void setCreationTime(Timestamp creationTime) {
+		this.creationTime = creationTime;
 	}
 
-	public String getApiName() {
-		return apiName;
+	public String getRewardProgram() {
+		return rewardProgram;
 	}
 
-	public void setApiName(String apiName) {
-		this.apiName = apiName;
+	public void setRewardProgram(String rewardProgram) {
+		this.rewardProgram = rewardProgram;
 	}
 	
 }
