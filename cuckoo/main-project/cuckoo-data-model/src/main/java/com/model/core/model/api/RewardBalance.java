@@ -49,7 +49,7 @@ public class RewardBalance {
 	int availablePointBalance;
 	
 	@Column(name = "program_conversion_rate", insertable = true, updatable = true, columnDefinition = "float default 0")
-	float programConversionRate;
+	Double programConversionRate;
 	
 	@Column(name = "local_currency_code", insertable = true, updatable = true, columnDefinition = "varchar default ''")
 	String localCurrencyCode;
@@ -72,7 +72,7 @@ public class RewardBalance {
 	
 	public RewardBalance(int transId, String merchantCode, String cloakedCreditCardNumber, String rewardLinkCode,
 			String billingZipCode, String bankName, String rewardProgram, String status, Boolean isRedemptionEligible,
-			int availablePointBalance, float programConversionRate, String localCurrencyCode,
+			int availablePointBalance, Double programConversionRate, String localCurrencyCode,
 			int redemptionPointIncrement, int maximumPointsToRedeem, int minimumPointsToRedeem,
 			Timestamp creationTime) {
 		super();
@@ -184,11 +184,11 @@ public class RewardBalance {
 		this.availablePointBalance = availablePointBalance;
 	}
 
-	public float getProgramConversionRate() {
+	public Double getProgramConversionRate() {
 		return programConversionRate;
 	}
 
-	public void setProgramConversionRate(float programConversionRate) {
+	public void setProgramConversionRate(Double programConversionRate) {
 		this.programConversionRate = programConversionRate;
 	}
 

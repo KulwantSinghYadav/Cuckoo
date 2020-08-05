@@ -1,11 +1,11 @@
 package cuckoo.web.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cuckoo.config.api.ReqRes.model.RewardEligibilityResponseModel;
+import com.cuckoo.config.api.utills.RewardEligibilityUtills;
+import com.model.core.constant.ApplicationConstant;
 import com.model.core.model.api.RewardEligibility;
 
 import cuckoo.web.service.AuthorizationService;
@@ -55,23 +58,38 @@ public class RewardEligibilityController {
 			@RequestHeader(value = "accept") String accept, @RequestParam("merchantCode") String merchantCode,
 			@RequestParam("rewardProgram") String rewardProgram) throws IOException {
 
-		RewardEligibility CitiRewardEligibilityRequestResponse = new RewardEligibility();
+		RewardEligibilityResponseModel rewardEligibilityResponseModel = new RewardEligibilityResponseModel();
+		
 		/*
 		 * below code is only for city reward balance api to check successfully
 		 * insertion of response data.
 		 */
 		String accessToken = authorizationService.getAuthorizationToken();
+		
+		RewardEligibility rewardEligibilityRequest = RewardEligibilityUtills.setRewardEligibilityRequest(cloakedCreditCardNumbers,
+				merchantCode, rewardProgram, ApplicationConstant.Pending, ApplicationConstant.City);
+
+		rewardEligibilityService.addRewardEligibility(rewardEligibilityRequest);
+		
 		String response = callCitiRewardEligibility.callCityRewardEligibility(apiProduct, endpoint, accessToken,
 				contentType, countryCode, businessCode, acceptLanguage, accept, cloakedCreditCardNumbers, merchantCode,
 				rewardProgram);
-
-		CitiRewardEligibilityRequestResponse.setApiName("rewardEligibility");
-		CitiRewardEligibilityRequestResponse.setCreationTime(new Timestamp(System.currentTimeMillis()));
-		CitiRewardEligibilityRequestResponse.setResponseData(response);
-		CitiRewardEligibilityRequestResponse.setRequestUrl(".");
-
-		rewardEligibilityService.addRewardEligibility(CitiRewardEligibilityRequestResponse);
-
+		
+		rewardEligibilityResponseModel = RewardEligibilityUtills.getRewardEligibilityResponse(response);
+		
+		if(!StringUtils.isEmpty(rewardEligibilityResponseModel.getError())) {
+			
+			RewardEligibility rewardEligibility = rewardEligibilityService.getRewardEligibility(rewardEligibilityRequest.getTransId());
+			RewardEligibility rewardEligibilityResponse = RewardEligibilityUtills.setRewardEligibilityResponse(rewardEligibility,ApplicationConstant.Error,rewardEligibilityResponseModel);
+			
+			rewardEligibilityService.updateCitiRewardEligibility(rewardEligibilityResponse);
+		} else if(StringUtils.isEmpty(rewardEligibilityResponseModel.getError())) {
+			
+			RewardEligibility rewardEligibility = rewardEligibilityService.getRewardEligibility(rewardEligibilityRequest.getTransId());
+			RewardEligibility rewardEligibilityResponse = RewardEligibilityUtills.setRewardEligibilityResponse(rewardEligibility,ApplicationConstant.Completed,rewardEligibilityResponseModel);
+			
+			rewardEligibilityService.updateCitiRewardEligibility(rewardEligibilityResponse);
+		}
 		return response;
 
 	}

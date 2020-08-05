@@ -4,7 +4,7 @@ public class RewardBalanceResponseModel {
 
 	Boolean isRedemptionEligible;
 	int availablePointBalance;
-	float programConversionRate;
+	Double programConversionRate;
 	String localCurrencyCode;
 	int redemptionPointIncrement;
 	int maximumPointsToRedeem;
@@ -13,7 +13,7 @@ public class RewardBalanceResponseModel {
 	String errorResponse;
 	
 	public RewardBalanceResponseModel(Boolean isRedemptionEligible, int availablePointBalance,
-			float programConversionRate, String localCurrencyCode, int redemptionPointIncrement,
+			Double programConversionRate, String localCurrencyCode, int redemptionPointIncrement,
 			int maximumPointsToRedeem, int minimumPointsToRedeem,String error,String errorResponse) {
 		super();
 		this.isRedemptionEligible = isRedemptionEligible;
@@ -42,10 +42,10 @@ public class RewardBalanceResponseModel {
 	public void setAvailablePointBalance(int availablePointBalance) {
 		this.availablePointBalance = availablePointBalance;
 	}
-	public float getProgramConversionRate() {
+	public Double getProgramConversionRate() {
 		return programConversionRate;
 	}
-	public void setProgramConversionRate(float programConversionRate) {
+	public void setProgramConversionRate(Double programConversionRate) {
 		this.programConversionRate = programConversionRate;
 	}
 	public String getLocalCurrencyCode() {

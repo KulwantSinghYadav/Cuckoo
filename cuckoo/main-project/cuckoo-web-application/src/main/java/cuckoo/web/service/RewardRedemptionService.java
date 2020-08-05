@@ -39,5 +39,10 @@ public class RewardRedemptionService {
 	public void deleteRewardRedemption(int id) {
 		rewardRedemptionDao.remove(getRewardRedemption(id));
 	}
+	
+	@Transactional
+	public void updateRewardRedemption(RewardRedemption rewardRedemption) {
+		rewardRedemptionDao.merge(rewardRedemption);
+	}
 
 }

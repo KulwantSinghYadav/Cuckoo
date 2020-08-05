@@ -7,12 +7,14 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.cuckoo.config.api.ReqRes.model.RewardEnablementReqResModel;
 import com.cuckoo.config.api.config.BuildRequestApi;
 import com.cuckoo.config.api.config.BuildRequestHeader;
 import com.cuckoo.config.api.config.HeaderBuilder;
 import com.cuckoo.config.property.config.ConfigurationKeys;
 import com.cuckoo.config.property.config.ConfigurationProvider;
 import com.cuckoo.config.property.config.PropertyConfiguration;
+import com.google.gson.Gson;
 import com.model.core.constant.ApplicationConstant;
 
 @Component
@@ -23,7 +25,7 @@ public class CallCitiRewardEnablement extends BuildRequestApi {
 	 * The dynamic request is made from by getting the request arguments from the external user end.
 	 */
 	public String callCityRewardEnablement(String apiProduct, String endpoint, String authToken, String contentType,
-			String countryCode, String businessCode, String acceptLanguage, String accept, String rewardEnablementBody)
+			String countryCode, String businessCode, String acceptLanguage, String accept, RewardEnablementReqResModel rewardEnablementBody)
 			throws IOException {
 
 		String response = null;
@@ -32,7 +34,10 @@ public class CallCitiRewardEnablement extends BuildRequestApi {
 			PropertyConfiguration propertyConfiguration = new PropertyConfiguration();
 			ConfigurationProvider configurationProvider = propertyConfiguration.loadProperties();
 			String requestMethod = "put";
-			String requestBody = ApplicationConstant.Get_Citi_Reward_Enablement_Body;
+//			String requestBody = ApplicationConstant.Get_Citi_Reward_Enablement_Body;
+			
+			Gson gson = new Gson();
+			String reBody = gson.toJson(rewardEnablementBody);
 
 			/*
 			 * "setUrlPattern" function is used to build the dynamic URL request.
@@ -48,7 +53,7 @@ public class CallCitiRewardEnablement extends BuildRequestApi {
 			Map<String, String> queryParameters = new HashMap<String, String>();
 
 			// call the city reward enablement api by passing requied parameters.
-			response = sendApiRequest(url, buildRequestHearder, queryParameters, requestMethod, rewardEnablementBody);
+			response = sendApiRequest(url, buildRequestHearder, queryParameters, requestMethod, reBody);
 
 			System.out.println("Client Reward Enablement :" + response);
 

@@ -69,7 +69,7 @@ public class RewardBalanceController {
 			@RequestParam(value = "rewardLinkCode", required = false) String rewardLinkCode,
 			@RequestParam("rewardProgram") String rewardProgram) throws IOException {
 
-		String getRewardLinkCode = "";
+		String getRewardLinkCode = rewardLinkCode;
 		String response = "";
 		List<String> rewardLinkMainResponse = new ArrayList<String>();
 		RewardBalanceResponseModel rewardBalanceResponseModel = new RewardBalanceResponseModel();
@@ -93,10 +93,16 @@ public class RewardBalanceController {
 					merchantCode, rewardProgram, billingZipCode);
 		}
 
-		if (rewardLinkMainResponse.size() > 0 && rewardLinkMainResponse.get(0).equalsIgnoreCase("errors")) {
-			response = rewardLinkMainResponse.get(1);
-		} else {
+		if (StringUtils.isEmpty(rewardLinkCode) && rewardLinkMainResponse.size() > 0 && rewardLinkMainResponse.get(0).equalsIgnoreCase("errors")) {
 			
+			response = rewardLinkMainResponse.get(1);
+			return response;
+			
+		} else if(StringUtils.isEmpty(rewardLinkCode) && !rewardLinkMainResponse.get(0).equalsIgnoreCase("errors")){
+			
+			getRewardLinkCode = rewardLinkMainResponse.get(0);
+			
+		}
 			RewardBalance rewardBalanceRequest = RewardBalanceUtills.setRewardBalanceRequest(cloakedCreditCardNumbers,
 					merchantCode, rewardProgram, billingZipCode, ApplicationConstant.Pending, ApplicationConstant.City);
 
@@ -119,11 +125,6 @@ public class RewardBalanceController {
 				RewardBalance rewardBalanceResponse = RewardBalanceUtills.setRewardBalanceResponse(rewardBalance,ApplicationConstant.Completed,rewardBalanceResponseModel);
 				rewardBalanceService.updateCitiRewardBalance(rewardBalanceResponse);
 			}
-			
-			
-
-			
-		}
 
 		return response;
 	}

@@ -40,4 +40,8 @@ public class RewardEnablementService {
 		rewardEnablementDao.remove(getRewardEnablement(id));
 	}
 
+	@Transactional
+	public void updateRewardEnablement(RewardEnablement rewardEnablement) {
+		rewardEnablementDao.merge(rewardEnablement);
+	}
 }

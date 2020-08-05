@@ -37,7 +37,7 @@ public class RewardBalanceUtills {
 			
 			if(rewardBalanceResponseModel.getIsRedemptionEligible().equals(Boolean.TRUE)) {
 				rewardBalanceResponseModel.setAvailablePointBalance(obj.getInt("availablePointBalance"));
-				rewardBalanceResponseModel.setProgramConversionRate(obj.getFloat("programConversionRate"));
+				rewardBalanceResponseModel.setProgramConversionRate(obj.getDouble("programConversionRate"));
 				rewardBalanceResponseModel.setLocalCurrencyCode(obj.getString("localCurrencyCode"));
 				rewardBalanceResponseModel.setRedemptionPointIncrement(obj.getInt("redemptionPointIncrement"));
 				rewardBalanceResponseModel.setMaximumPointsToRedeem(obj.getInt("maximumPointsToRedeem"));

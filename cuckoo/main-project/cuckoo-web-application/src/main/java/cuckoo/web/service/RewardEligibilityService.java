@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cuckoo.dao.impl.api.RewardEligibilityDao;
+import com.model.core.model.api.RewardBalance;
 import com.model.core.model.api.RewardEligibility;
 
 /*
@@ -26,7 +27,7 @@ public class RewardEligibilityService {
 	}
 
 	@Transactional
-	public RewardEligibility getRewardEligibility(int id) {
+	public RewardEligibility getRewardEligibility(Integer id) {
 		return rewardEligibilityDao.findById(id);
 	}
 
@@ -40,4 +41,8 @@ public class RewardEligibilityService {
 		rewardEligibilityDao.remove(getRewardEligibility(id));
 	}
 
+	@Transactional
+	public void updateCitiRewardEligibility(RewardEligibility rewardEligibility) {
+		rewardEligibilityDao.merge(rewardEligibility);
+	}
 }
